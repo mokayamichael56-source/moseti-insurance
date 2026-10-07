@@ -1,0 +1,1683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moseti Insurance | Health · General · Motor · Corporate</title>
+<style>
+  :root {
+    --primary:#0d4f4f; --primary-light:#1a7a7a; --accent:#e8a33d; --accent-dark:#c8862a;
+    --gold:#c9a227; --gold-dark:#a88518; --silver:#8a9396; --silver-dark:#6d7477;
+    --bronze:#b87333; --bronze-dark:#94591e; --bodaboda:#d97706; --corporate:#1c4e80;
+    --bg:#f4f7f6; --card:#fff; --text:#1a2e2e; --text-muted:#5a6e6e; --border:#d8e3e0;
+    --success:#2e7d5b; --warning:#c8862a; --danger:#b3453a;
+    --shadow:0 2px 12px rgba(13,79,79,0.08); --shadow-lg:0 8px 32px rgba(13,79,79,0.12);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Segoe UI',system-ui,-apple-system,sans-serif; background:var(--bg); color:var(--text); line-height:1.6; min-height:100vh; }
+
+  /* TOP BAR */
+  .top-bar { background:linear-gradient(135deg,var(--primary),var(--primary-light)); color:#fff; padding:0 2rem; box-shadow:var(--shadow-lg); position:sticky; top:0; z-index:100; }
+  .top-bar-inner { max-width:1400px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; height:68px; gap:1rem; flex-wrap:wrap; }
+  .brand { display:flex; align-items:center; gap:12px; font-weight:700; font-size:1.1rem; cursor:pointer; }
+  .brand-icon { width:38px; height:38px; background:var(--accent); border-radius:10px; display:grid; place-items:center; font-size:1.2rem; color:var(--primary); font-weight:800; font-family:Georgia,serif; }
+  .brand small { display:block; font-size:0.62rem; opacity:0.85; letter-spacing:0.5px; text-transform:uppercase; }
+  .top-nav { display:flex; gap:3px; align-items:center; flex-wrap:wrap; }
+  .top-nav button { background:transparent; border:none; color:rgba(255,255,255,0.85); padding:8px 13px; border-radius:8px; cursor:pointer; font-size:0.8rem; font-weight:500; font-family:inherit; transition:all 0.2s; }
+  .top-nav button:hover, .top-nav button.active { background:rgba(255,255,255,0.15); color:#fff; }
+  .top-nav button.cta { background:var(--accent); color:var(--primary); font-weight:700; }
+  .top-nav button.cta:hover { background:var(--accent-dark); color:#fff; }
+
+  main { max-width:1400px; margin:0 auto; padding:2rem; }
+  .page { display:none; }
+  .page.active { display:block; animation:fadeIn 0.35s ease; }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(8px);} to{opacity:1;transform:none;} }
+  .page-header { margin-bottom:1.75rem; }
+  .page-header h1 { font-size:1.6rem; font-weight:700; color:var(--primary); }
+  .page-header p { color:var(--text-muted); font-size:0.9rem; margin-top:4px; }
+
+  /* HERO */
+  .hero { background:linear-gradient(135deg,var(--primary),var(--primary-light)); color:#fff; border-radius:18px; padding:3rem 2.5rem; margin-bottom:2rem; box-shadow:var(--shadow-lg); }
+  .hero h1 { font-size:2rem; font-weight:800; line-height:1.2; max-width:700px; margin-bottom:1rem; }
+  .hero p { font-size:1rem; opacity:0.92; max-width:620px; margin-bottom:1.5rem; }
+  .hero .cta-row { display:flex; gap:12px; flex-wrap:wrap; }
+  .hero .cta-row button { padding:12px 24px; border-radius:10px; font-size:0.92rem; font-weight:700; cursor:pointer; border:none; font-family:inherit; }
+  .btn-hero-primary { background:var(--accent); color:var(--primary); }
+  .btn-hero-primary:hover { background:var(--accent-dark); color:#fff; }
+  .btn-hero-ghost { background:rgba(255,255,255,0.15); color:#fff; border:1.5px solid rgba(255,255,255,0.3) !important; }
+  .btn-hero-ghost:hover { background:rgba(255,255,255,0.25); }
+
+  /* CARDS */
+  .stats-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1.25rem; margin-bottom:2rem; }
+  .stat-card { background:var(--card); border-radius:14px; padding:1.4rem 1.5rem; box-shadow:var(--shadow); border:1px solid var(--border); position:relative; overflow:hidden; }
+  .stat-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:var(--accent); }
+  .stat-card .label { font-size:0.72rem; text-transform:uppercase; letter-spacing:1px; color:var(--text-muted); font-weight:600; }
+  .stat-card .value { font-size:1.9rem; font-weight:700; color:var(--primary); margin:6px 0 2px; }
+  .stat-card .sub { font-size:0.78rem; color:var(--text-muted); }
+  .card { background:var(--card); border-radius:14px; box-shadow:var(--shadow); border:1px solid var(--border); margin-bottom:1.5rem; overflow:hidden; }
+  .card-header { padding:1.1rem 1.5rem; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; background:#fafcfb; flex-wrap:wrap; gap:10px; }
+  .card-header h2 { font-size:1rem; font-weight:700; color:var(--primary); }
+  .card-body { padding:1.5rem; }
+
+  /* BUTTONS */
+  .btn { display:inline-flex; align-items:center; gap:7px; padding:10px 18px; border-radius:9px; font-size:0.85rem; font-weight:600; cursor:pointer; border:none; font-family:inherit; transition:all 0.2s; }
+  .btn-primary { background:var(--primary); color:#fff; }
+  .btn-primary:hover { background:var(--primary-light); }
+  .btn-accent { background:var(--accent); color:var(--primary); }
+  .btn-accent:hover { background:var(--accent-dark); color:#fff; }
+  .btn-outline { background:transparent; color:var(--primary); border:1.5px solid var(--border); }
+  .btn-outline:hover { border-color:var(--primary); background:rgba(13,79,79,0.04); }
+  .btn-sm { padding:6px 12px; font-size:0.78rem; }
+  .btn-block { width:100%; justify-content:center; }
+  .btn:disabled { opacity:0.5; cursor:not-allowed; }
+
+  /* FORMS */
+  .form-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1rem; }
+  .form-group { margin-bottom:0.25rem; }
+  .form-group label { display:block; font-size:0.76rem; font-weight:600; color:var(--text-muted); margin-bottom:5px; text-transform:uppercase; letter-spacing:0.4px; }
+  .form-group label .req { color:var(--danger); margin-left:3px; }
+  .form-group input,.form-group select,.form-group textarea { width:100%; padding:10px 12px; border:1.5px solid var(--border); border-radius:9px; font-size:0.88rem; font-family:inherit; background:#fff; color:var(--text); }
+  .form-group input:focus,.form-group select:focus,.form-group textarea:focus { outline:none; border-color:var(--primary-light); box-shadow:0 0 0 3px rgba(26,122,122,0.1); }
+  .form-group input:read-only { background:#f0f6f4; color:var(--primary); font-weight:600; }
+  .form-group .hint { font-size:0.72rem; color:var(--text-muted); margin-top:4px; }
+
+  /* ALERTS */
+  .alert { padding:12px 16px; border-radius:10px; font-size:0.84rem; margin-bottom:1rem; display:flex; align-items:flex-start; gap:10px; }
+  .alert-info { background:#e8f2f1; color:var(--primary); border-left:4px solid var(--primary-light); }
+  .alert-warn { background:#fdf3e3; color:#8a5a1a; border-left:4px solid var(--accent); }
+  .alert-success { background:#e3f3ec; color:#1e5a3e; border-left:4px solid var(--success); }
+  .alert-danger { background:#fbe9e7; color:#8a2a1a; border-left:4px solid var(--danger); }
+
+  /* BADGES */
+  .badge { display:inline-block; padding:3px 10px; border-radius:20px; font-size:0.7rem; font-weight:700; }
+  .badge-green { background:#e3f3ec; color:var(--success); }
+  .badge-amber { background:#fdf3e3; color:var(--warning); }
+  .badge-red { background:#fbe9e7; color:var(--danger); }
+  .badge-blue { background:#e3eef8; color:#2a6a9e; }
+  .badge-purple { background:#ece3f5; color:#6a3a9e; }
+  .badge-gray { background:#eef4f2; color:var(--text-muted); }
+
+  /* STEPS */
+  .steps { display:flex; justify-content:space-between; margin-bottom:2rem; position:relative; }
+  .steps::before { content:''; position:absolute; top:18px; left:40px; right:40px; height:2px; background:var(--border); z-index:0; }
+  .step { display:flex; flex-direction:column; align-items:center; gap:6px; position:relative; z-index:1; flex:1; }
+  .step-circle { width:36px; height:36px; border-radius:50%; background:#fff; border:2px solid var(--border); display:grid; place-items:center; font-weight:700; font-size:0.85rem; color:var(--text-muted); }
+  .step.active .step-circle { background:var(--primary); border-color:var(--primary); color:#fff; box-shadow:0 0 0 4px rgba(13,79,79,0.15); }
+  .step.done .step-circle { background:var(--success); border-color:var(--success); color:#fff; }
+  .step-label { font-size:0.72rem; font-weight:600; color:var(--text-muted); text-align:center; }
+  .step.active .step-label { color:var(--primary); }
+
+  /* OTP */
+  .otp-inputs { display:flex; gap:10px; justify-content:center; margin:1.5rem 0; }
+  .otp-inputs input { width:52px; height:62px; text-align:center; font-size:1.6rem; font-weight:800; border:2px solid var(--border); border-radius:12px; color:var(--primary); font-family:'Courier New',monospace; }
+  .otp-inputs input:focus { outline:none; border-color:var(--accent); box-shadow:0 0 0 4px rgba(232,163,61,0.2); }
+  .otp-inputs input.filled { border-color:var(--primary); background:#e8f2f1; }
+  .otp-meta { display:flex; justify-content:space-between; font-size:0.82rem; color:var(--text-muted); margin-bottom:1rem; }
+  .otp-timer { font-weight:700; color:var(--primary); font-family:'Courier New',monospace; }
+  .otp-timer.expiring { color:var(--danger); }
+
+  /* PAYMENT */
+  .payment-options { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:1rem; margin:1rem 0; }
+  .pay-option { padding:1rem; border:2px solid var(--border); border-radius:12px; cursor:pointer; text-align:center; transition:all 0.2s; background:#fff; }
+  .pay-option:hover { border-color:var(--primary-light); }
+  .pay-option.selected { border-color:var(--primary); background:#e8f2f1; }
+  .pay-option .pay-icon { font-size:1.8rem; margin-bottom:6px; }
+  .pay-option .pay-name { font-weight:700; font-size:0.85rem; color:var(--primary); }
+  .pay-option .pay-desc { font-size:0.7rem; color:var(--text-muted); }
+
+  /* PLANS */
+  .plans { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1.25rem; margin:1rem 0; }
+  .plan-card { background:#fff; border:2px solid var(--border); border-radius:16px; padding:1.5rem; position:relative; cursor:pointer; transition:all 0.2s; }
+  .plan-card:hover { transform:translateY(-4px); box-shadow:var(--shadow-lg); }
+  .plan-card.popular::after { content:'POPULAR'; position:absolute; top:-10px; right:16px; background:var(--accent); color:var(--primary); font-size:0.65rem; font-weight:800; padding:3px 10px; border-radius:20px; }
+  .plan-name { font-size:1.1rem; font-weight:800; color:var(--primary); margin-bottom:4px; }
+  .plan-desc { font-size:0.82rem; color:var(--text-muted); margin-bottom:1rem; }
+  .plan-price { font-size:1.9rem; font-weight:800; color:var(--primary); letter-spacing:-1px; margin-bottom:4px; }
+  .plan-price small { font-size:0.75rem; font-weight:500; color:var(--text-muted); }
+  .plan-features { list-style:none; margin:1rem 0; }
+  .plan-features li { font-size:0.82rem; padding:4px 0; }
+  .plan-features li::before { content:'✓ '; color:var(--success); font-weight:800; }
+
+  /* PRODUCT GRID */
+  .product-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1.25rem; margin:1rem 0; }
+  .product-card { background:#fff; border-radius:16px; padding:1.5rem; border:1.5px solid var(--border); cursor:pointer; transition:all 0.2s; position:relative; overflow:hidden; display:flex; flex-direction:column; }
+  .product-card:hover { transform:translateY(-4px); box-shadow:var(--shadow-lg); }
+  .product-card::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; }
+  .product-card.student::before { background:linear-gradient(90deg,#1c7ed6,#4a9fdd); }
+  .product-card.general::before { background:linear-gradient(90deg,var(--primary),var(--primary-light)); }
+  .product-card.bodaboda::before { background:linear-gradient(90deg,var(--bodaboda),#f59e0b); }
+  .product-card.corporate::before { background:linear-gradient(90deg,var(--corporate),#3b82f6); }
+  .product-icon { font-size:2.2rem; margin-bottom:0.75rem; }
+  .product-name { font-size:1.1rem; font-weight:800; color:var(--primary); margin-bottom:4px; }
+  .product-tagline { font-size:0.8rem; color:var(--text-muted); margin-bottom:1rem; }
+  .product-price-tag { background:#f0f6f4; padding:8px 12px; border-radius:8px; font-size:0.78rem; margin-bottom:1rem; }
+  .product-price-tag strong { color:var(--primary); font-size:1rem; display:block; }
+  .product-card .btn { margin-top:auto; }
+
+  /* TIER CARDS */
+  .tier-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.25rem; margin:1rem 0; }
+  .tier-card { border-radius:16px; padding:1.5rem; cursor:pointer; transition:all 0.2s; border:3px solid transparent; background:#fff; }
+  .tier-card.gold { border-color:var(--gold); background:linear-gradient(180deg,#fffbf0 0%,#fff 40%); }
+  .tier-card.silver { border-color:var(--silver); background:linear-gradient(180deg,#f8fafa 0%,#fff 40%); }
+  .tier-card.bronze { border-color:var(--bronze); background:linear-gradient(180deg,#fff8f0 0%,#fff 40%); }
+  .tier-card.selected { box-shadow:0 12px 32px rgba(0,0,0,0.15); }
+  .tier-header { display:flex; align-items:center; gap:10px; margin-bottom:1rem; }
+  .tier-medal { width:44px; height:44px; border-radius:50%; display:grid; place-items:center; font-size:1.3rem; color:#fff; }
+  .tier-medal.gold { background:linear-gradient(135deg,var(--gold),var(--gold-dark)); }
+  .tier-medal.silver { background:linear-gradient(135deg,var(--silver),var(--silver-dark)); }
+  .tier-medal.bronze { background:linear-gradient(135deg,var(--bronze),var(--bronze-dark)); }
+  .tier-name { font-size:1.3rem; font-weight:800; }
+  .tier-name.gold { color:var(--gold-dark); }
+  .tier-name.silver { color:var(--silver-dark); }
+  .tier-name.bronze { color:var(--bronze-dark); }
+  .tier-sub { font-size:0.75rem; color:var(--text-muted); text-transform:uppercase; }
+  .tier-price-row { display:flex; gap:6px; margin:1rem 0; }
+  .tier-price-btn { flex:1; padding:10px; border-radius:10px; border:2px solid var(--border); background:#fff; cursor:pointer; text-align:center; font-family:inherit; }
+  .tier-price-btn.selected { border-color:var(--primary); background:#e8f2f1; }
+  .tier-price-btn .tp-term { font-size:0.7rem; color:var(--text-muted); text-transform:uppercase; font-weight:700; }
+  .tier-price-btn .tp-amt { font-size:1.05rem; font-weight:800; color:var(--primary); }
+  .tier-benefits { list-style:none; margin:1rem 0; }
+  .tier-benefits li { display:flex; justify-content:space-between; padding:6px 0; font-size:0.82rem; border-bottom:1px dashed #eef4f2; }
+  .tier-benefits li .bl { color:var(--text-muted); }
+  .tier-benefits li .bv { font-weight:700; color:var(--primary); }
+
+  /* DUAL TOGGLE */
+  .dual-pricing-toggle { display:flex; background:#eef4f2; border-radius:12px; padding:5px; margin:1rem 0; max-width:420px; }
+  .dual-pricing-toggle button { flex:1; background:transparent; border:none; padding:10px 16px; border-radius:9px; font-size:0.84rem; font-weight:700; color:var(--text-muted); cursor:pointer; font-family:inherit; }
+  .dual-pricing-toggle button.active { background:#fff; color:var(--primary); box-shadow:0 2px 8px rgba(0,0,0,0.08); }
+  .dual-pricing-toggle button.inst.active { background:var(--corporate); color:#fff; }
+
+  /* TABLES */
+  .table-wrap { overflow-x:auto; }
+  table { width:100%; border-collapse:collapse; font-size:0.84rem; }
+  th { text-align:left; padding:10px 14px; background:#f0f6f4; color:var(--primary); font-weight:700; font-size:0.72rem; text-transform:uppercase; border-bottom:2px solid var(--border); white-space:nowrap; }
+  td { padding:10px 14px; border-bottom:1px solid var(--border); }
+  tr:hover td { background:#fafcfb; }
+  .tier-table { width:100%; border-collapse:separate; border-spacing:0; border-radius:12px; overflow:hidden; box-shadow:var(--shadow); font-size:0.88rem; }
+  .tier-table th { padding:12px 16px; color:#fff; text-transform:uppercase; font-size:0.82rem; font-weight:800; }
+  .tier-table th.col-item { background:#1c7ed6; }
+  .tier-table th.col-gold { background:linear-gradient(135deg,var(--gold),var(--gold-dark)); }
+  .tier-table th.col-silver { background:linear-gradient(135deg,var(--silver),var(--silver-dark)); }
+  .tier-table th.col-bronze { background:linear-gradient(135deg,var(--bronze),var(--bronze-dark)); }
+  .tier-table td { padding:11px 16px; background:#fff; border-bottom:1px solid #e8ecec; }
+  .tier-table tr:nth-child(odd) td { background:#fafcfb; }
+  .tier-table td:first-child { font-weight:600; }
+  .tier-table td.num { font-weight:700; color:var(--primary); }
+
+  /* TABS */
+  .tabs { display:flex; gap:2px; border-bottom:2px solid var(--border); margin-bottom:1.25rem; flex-wrap:wrap; }
+  .tab { padding:9px 18px; background:none; border:none; font-size:0.84rem; font-weight:600; color:var(--text-muted); cursor:pointer; border-bottom:2px solid transparent; margin-bottom:-2px; font-family:inherit; }
+  .tab.active { color:var(--primary); border-bottom-color:var(--accent); }
+
+  /* MODAL */
+  .modal-overlay { display:none; position:fixed; inset:0; background:rgba(13,40,40,0.55); backdrop-filter:blur(4px); z-index:200; align-items:center; justify-content:center; padding:1rem; }
+  .modal-overlay.open { display:flex; }
+  .modal { background:#fff; border-radius:16px; width:100%; max-width:560px; max-height:90vh; overflow-y:auto; box-shadow:0 20px 60px rgba(0,0,0,0.3); }
+  .modal-lg { max-width:900px; }
+  .modal-header { padding:1.2rem 1.5rem; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+  .modal-header h3 { font-size:1.05rem; color:var(--primary); }
+  .modal-close { background:none; border:none; font-size:1.4rem; cursor:pointer; color:var(--text-muted); }
+  .modal-body { padding:1.5rem; }
+  .modal-footer { padding:1rem 1.5rem; border-top:1px solid var(--border); display:flex; justify-content:flex-end; gap:10px; }
+
+  /* MISC */
+  .flex-between { display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap; }
+  .mt-1 { margin-top:0.5rem; } .mt-2 { margin-top:1rem; }
+  .text-muted { color:var(--text-muted); } .text-sm { font-size:0.8rem; }
+  .text-center { text-align:center; }
+  .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; }
+  .grid-3 { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1rem; }
+  @media(max-width:1000px){ .grid-2,.grid-3{grid-template-columns:1fr;} .top-nav{display:none;} .top-bar-inner{height:auto; padding:12px 0;} .otp-inputs input{width:42px; height:52px; font-size:1.3rem;} }
+  footer { text-align:center; padding:2rem; color:var(--text-muted); font-size:0.78rem; border-top:1px solid var(--border); margin-top:2rem; }
+  footer strong { color:var(--primary); }
+  footer a { color:var(--primary); font-weight:700; text-decoration:none; }
+  .spinner { display:inline-block; width:16px; height:16px; border:2px solid rgba(255,255,255,0.3); border-top-color:#fff; border-radius:50%; animation:spin 0.6s linear infinite; }
+  @keyframes spin { to{transform:rotate(360deg);} }
+  .success-burst { width:80px; height:80px; background:var(--success); border-radius:50%; display:grid; place-items:center; margin:0 auto 1rem; font-size:2.5rem; color:#fff; animation:burst 0.6s ease-out; }
+  @keyframes burst { 0%{transform:scale(0);opacity:0;} 60%{transform:scale(1.15);opacity:1;} 100%{transform:scale(1);} }
+  .nav-badge { background:var(--danger); color:#fff; border-radius:10px; padding:1px 7px; font-size:0.65rem; font-weight:800; margin-left:4px; }
+
+  /* BANNERS */
+  .general-banner,.student-banner { color:#fff; border-radius:16px; padding:2rem; margin:2rem 0; display:flex; align-items:center; gap:2rem; flex-wrap:wrap; position:relative; overflow:hidden; }
+  .general-banner { background:linear-gradient(135deg,#0a3d3d,#0d4f4f); }
+  .student-banner { background:linear-gradient(135deg,#1a4f8f,#1c7ed6); }
+  .general-banner::before { content:'🛡️'; position:absolute; top:-30px; right:20px; font-size:10rem; opacity:0.08; }
+  .student-banner::before { content:'🎓'; position:absolute; top:-30px; right:20px; font-size:10rem; opacity:0.08; }
+  .gb-tag,.sb-tag { display:inline-block; background:var(--accent); color:var(--primary); font-size:0.68rem; font-weight:800; padding:4px 12px; border-radius:20px; letter-spacing:1px; text-transform:uppercase; margin-bottom:0.75rem; }
+  .gb-content,.sb-content { flex:1; min-width:260px; z-index:1; }
+  .general-banner h3,.student-banner h3 { font-size:1.5rem; font-weight:800; margin-bottom:0.5rem; }
+  .general-banner p,.student-banner p { opacity:0.92; font-size:0.9rem; margin-bottom:1rem; max-width:520px; }
+  .gb-actions,.sb-actions { display:flex; gap:10px; flex-wrap:wrap; }
+  .general-banner button.btn-outline,.student-banner button.btn-outline { background:rgba(255,255,255,0.15); color:#fff; border-color:rgba(255,255,255,0.3); }
+
+  /* ID CARD */
+  .id-card-visual { background:linear-gradient(135deg,#0d4f4f 0%,#1a7a7a 100%); border-radius:12px; padding:1.25rem; color:#fff; position:relative; overflow:hidden; }
+  .id-card-visual::before { content:'🇰🇪'; position:absolute; top:-20px; right:-20px; font-size:8rem; opacity:0.1; }
+  .id-card-visual .ic-label { font-size:0.65rem; text-transform:uppercase; letter-spacing:1px; opacity:0.8; font-weight:700; }
+  .id-card-visual .ic-value { font-size:1rem; font-weight:700; margin-bottom:10px; }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <div class="top-bar-inner">
+    <div class="brand" onclick="showPage('home')">
+      <div class="brand-icon">M</div>
+      <div>Moseti Insurance<small>Health · General · Motor · Corporate</small></div>
+    </div>
+    <nav class="top-nav">
+      <button class="active" onclick="showPage('home', this)">Home</button>
+      <button onclick="showPage('general', this)">General 🛡️</button>
+      <button onclick="showPage('plans', this)">Health Plans</button>
+      <button class="cta" onclick="startSignup()">Sign Up</button>
+      <button onclick="openMemberLogin()">Member Login</button>
+      <button onclick="openAdminView()">Admin</button>
+    </nav>
+  </div>
+</div>
+
+<main>
+
+<!-- HOME -->
+<section id="page-home" class="page active">
+  <div class="hero">
+    <h1>Insurance for every stage of Kenyan life</h1>
+    <p>Health cover, personal accident, bodaboda protection, and corporate WIBA — all from one platform. Sign up in minutes with your National ID.</p>
+    <div class="cta-row">
+      <button class="btn-hero-primary" onclick="showPage('general')">Explore All Products →</button>
+      <button class="btn-hero-ghost" onclick="startSignup()">Get a Health Plan</button>
+    </div>
+  </div>
+
+  <div class="general-banner">
+    <div class="gb-content">
+      <div class="gb-tag">🛡️ General Insurance</div>
+      <h3>Protection beyond health</h3>
+      <p>Personal accident cover from KES 350/year. Bodaboda from KES 35/month. Corporate WIBA &amp; GPA for teams of 5+. Student attachment cover from KES 95 (group).</p>
+      <div class="gb-actions">
+        <button class="btn btn-accent" onclick="showPage('general')">View All Products →</button>
+        <button class="btn btn-outline" onclick="showPage('student')">Student Cover 🎓</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card"><div class="label">Registered Members</div><div class="value" id="statMembers">—</div><div class="sub">Live from database</div></div>
+    <div class="stat-card"><div class="label">Claims Paid</div><div class="value">KSh 2.8B</div><div class="sub">Since inception</div></div>
+    <div class="stat-card"><div class="label">Products Available</div><div class="value">8+</div><div class="sub">Health &amp; General</div></div>
+    <div class="stat-card"><div class="label">Network Hospitals</div><div class="value">1,240</div><div class="sub">Nationwide</div></div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-header"><h2>Why Moseti?</h2></div>
+      <div class="card-body">
+        <div class="alert alert-success"><span>⚡</span><div><strong>ID-based auto-enrollment.</strong> Enter your National ID and we pull your details from the national registry.</div></div>
+        <div class="alert alert-info"><span>🔐</span><div><strong>OTP verification.</strong> Secure 6-digit codes generated with calculus-based RNG.</div></div>
+        <div class="alert alert-info"><span>💾</span><div><strong>Real persistence.</strong> All registrations saved to SQLite database.</div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><h2>Quick Links</h2></div>
+      <div class="card-body">
+        <button class="btn btn-outline btn-block" style="margin-bottom:10px; justify-content:flex-start;" onclick="showPage('student')">🎓 Student Attachment Cover →</button>
+        <button class="btn btn-outline btn-block" style="margin-bottom:10px; justify-content:flex-start;" onclick="showPage('individual-pa')">💼 Standard Individual PA →</button>
+        <button class="btn btn-outline btn-block" style="margin-bottom:10px; justify-content:flex-start;" onclick="showPage('bodaboda')">🏍️ Bodaboda Cover →</button>
+        <button class="btn btn-outline btn-block" style="margin-bottom:10px; justify-content:flex-start;" onclick="showPage('corporate')">🏢 Corporate / WIBA →</button>
+        <button class="btn btn-outline btn-block" style="justify-content:flex-start;" onclick="showPage('plans')">❤️ Standard Health Plans →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GENERAL HUB -->
+<section id="page-general" class="page">
+  <div class="page-header"><h1>🛡️ General Insurance Products</h1><p>Personal accident and micro-insurance covers.</p></div>
+  <div class="product-grid">
+    <div class="product-card student" onclick="showPage('student')">
+      <div class="product-icon">🎓</div><div class="product-name">Student Internship PA</div>
+      <div class="product-tagline">For students on attachment. Individual or institutional rates.</div>
+      <div class="product-price-tag"><strong>From KES 95</strong>institutional group rate</div>
+      <button class="btn btn-primary btn-sm">Explore →</button>
+    </div>
+    <div class="product-card general" onclick="showPage('individual-pa')">
+      <div class="product-icon">💼</div><div class="product-name">Standard Individual PA</div>
+      <div class="product-tagline">Everyday protection — slips, falls, road transit.</div>
+      <div class="product-price-tag"><strong>From KES 1,282</strong>per year</div>
+      <button class="btn btn-primary btn-sm">Explore →</button>
+    </div>
+    <div class="product-card bodaboda" onclick="showPage('bodaboda')">
+      <div class="product-icon">🏍️</div><div class="product-name">Bodaboda PA</div>
+      <div class="product-tagline">Micro-insurance for riders &amp; passengers.</div>
+      <div class="product-price-tag"><strong>From KES 35</strong>per month</div>
+      <button class="btn btn-primary btn-sm">Explore →</button>
+    </div>
+    <div class="product-card corporate" onclick="showPage('corporate')">
+      <div class="product-icon">🏢</div><div class="product-name">Corporate WIBA &amp; GPA</div>
+      <div class="product-tagline">Statutory WIBA + Group PA for teams of 5+.</div>
+      <div class="product-price-tag"><strong>0.5% – 1.5%</strong>of annual payroll</div>
+      <button class="btn btn-primary btn-sm">Explore →</button>
+    </div>
+  </div>
+</section>
+
+<!-- STUDENT -->
+<section id="page-student" class="page">
+  <div class="page-header"><h1>🎓 Student Internship Personal Accident</h1><p>For college and university students on attachment.</p></div>
+  <div class="dual-pricing-toggle">
+    <button class="active" id="btnIndividual" onclick="switchStudentPricing('individual')">👤 Individual Student</button>
+    <button class="inst" id="btnInstitutional" onclick="switchStudentPricing('institutional')">🏫 Institutional Group</button>
+  </div>
+  <div class="alert alert-warn" id="institutionalNote" style="display:none;">
+    <span>🏫</span><div><strong>Group rates:</strong> Minimum 20 students. Signed master agreement + bulk invoice required.</div>
+  </div>
+
+  <div class="tier-grid">
+    <div class="tier-card gold" onclick="selectTierCard('gold')">
+      <div class="tier-header"><div class="tier-medal gold">🥇</div><div><div class="tier-name gold">GOLD</div><div class="tier-sub">Complete protection</div></div></div>
+      <ul class="tier-benefits">
+        <li><span class="bl">Accidental Medical</span><span class="bv">KES 150,000</span></li>
+        <li><span class="bl">Permanent Disability</span><span class="bv">KES 300,000</span></li>
+        <li><span class="bl">Accidental Death</span><span class="bv">KES 100,000</span></li>
+        <li><span class="bl">Dental</span><span class="bv">KES 15,000</span></li>
+        <li><span class="bl">Last Expense</span><span class="bv">KES 25,000</span></li>
+      </ul>
+      <div class="tier-price-row" id="goldPriceRow"></div>
+    </div>
+
+    <div class="tier-card silver" onclick="selectTierCard('silver')">
+      <div class="tier-header"><div class="tier-medal silver">🥈</div><div><div class="tier-name silver">SILVER</div><div class="tier-sub">Balanced protection</div></div></div>
+      <ul class="tier-benefits">
+        <li><span class="bl">Accidental Medical</span><span class="bv">KES 100,000</span></li>
+        <li><span class="bl">Permanent Disability</span><span class="bv">KES 200,000</span></li>
+        <li><span class="bl">Accidental Death</span><span class="bv">KES 100,000</span></li>
+        <li><span class="bl">Dental</span><span class="bv">KES 15,000</span></li>
+        <li><span class="bl">Last Expense</span><span class="bv">KES 25,000</span></li>
+      </ul>
+      <div class="tier-price-row" id="silverPriceRow"></div>
+    </div>
+
+    <div class="tier-card bronze" onclick="selectTierCard('bronze')">
+      <div class="tier-header"><div class="tier-medal bronze">🥉</div><div><div class="tier-name bronze">BRONZE</div><div class="tier-sub">Essential cover</div></div></div>
+      <ul class="tier-benefits">
+        <li><span class="bl">Accidental Medical</span><span class="bv">KES 75,000</span></li>
+        <li><span class="bl">Permanent Disability</span><span class="bv">KES 100,000</span></li>
+        <li><span class="bl">Accidental Death</span><span class="bv">KES 75,000</span></li>
+        <li><span class="bl">Dental</span><span class="bv">KES 15,000</span></li>
+        <li><span class="bl">Last Expense</span><span class="bv">KES 25,000</span></li>
+      </ul>
+      <div class="tier-price-row" id="bronzePriceRow"></div>
+    </div>
+  </div>
+
+  <div class="card mt-2">
+    <div class="card-header"><h2>Your Selection</h2></div>
+    <div class="card-body" id="studentSelectionSummary">
+      <div class="alert alert-info" style="margin-bottom:0;"><span>👆</span><div>Select a tier and term above.</div></div>
+    </div>
+  </div>
+
+  <div class="card mt-2">
+    <div class="card-header"><h2 id="studentPremiumsTitle">Individual Student Premiums</h2></div>
+    <div class="card-body">
+      <table class="tier-table">
+        <thead><tr><th class="col-item">Rates</th><th class="col-gold">🥇 Gold</th><th class="col-silver">🥈 Silver</th><th class="col-bronze">🥉 Bronze</th></tr></thead>
+        <tbody id="studentPremTbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="text-center mt-2">
+    <button class="btn btn-accent" onclick="startStudentSignup()" style="padding:14px 32px; font-size:1rem;">Enroll Now →</button>
+  </div>
+</section>
+
+<!-- INDIVIDUAL PA -->
+<section id="page-individual-pa" class="page">
+  <div class="page-header"><h1>💼 Standard Individual Personal Accident</h1><p>Everyday protection for working Kenyans.</p></div>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-header"><h2>Entry-Level Cover</h2></div>
+      <div class="card-body">
+        <div class="plan-price" style="font-size:2.6rem;">KES 1,282 <small>/year</small></div>
+        <ul class="plan-features mt-2">
+          <li>Accidental Death — <strong>KES 250,000</strong></li>
+          <li>Permanent Total Disability — <strong>KES 250,000</strong></li>
+          <li>Medical bills reimbursement</li>
+          <li>Hospital cash benefit</li>
+          <li>Artificial appliances cover</li>
+          <li>48-hour funeral expense support</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><h2>Customize</h2></div>
+      <div class="card-body">
+        <div class="form-group"><label>Sum Assured</label>
+          <select id="ipaSum" onchange="updateIPA()">
+            <option value="250000" selected>KES 250,000</option>
+            <option value="500000">KES 500,000</option>
+            <option value="1000000">KES 1,000,000</option>
+            <option value="2500000">KES 2,500,000</option>
+            <option value="5000000">KES 5,000,000</option>
+            <option value="10000000">KES 10,000,000</option>
+          </select>
+        </div>
+        <div class="form-group mt-1"><label>Medical Limit</label>
+          <select id="ipaMedical" onchange="updateIPA()">
+            <option value="50000">KES 50,000</option>
+            <option value="100000" selected>KES 100,000</option>
+            <option value="250000">KES 250,000</option>
+            <option value="500000">KES 500,000</option>
+          </select>
+        </div>
+        <div class="form-group mt-1"><label>Occupation Risk Class</label>
+          <select id="ipaRisk" onchange="updateIPA()">
+            <option value="1">Class 1 — Office (lowest)</option>
+            <option value="1.3">Class 2 — Light manual</option>
+            <option value="1.7">Class 3 — Skilled manual</option>
+            <option value="2.2">Class 4 — Heavy manual</option>
+            <option value="3.0">Class 5 — Hazardous</option>
+          </select>
+        </div>
+        <div style="background:#f0f6f4; border-radius:12px; padding:1.5rem; margin-top:1rem; border:2px solid var(--primary);">
+          <div class="text-sm text-muted" style="text-transform:uppercase; font-weight:700;">Your Annual Premium</div>
+          <div style="font-size:2rem; font-weight:800; color:var(--primary);" id="ipaPremium">KES 1,282</div>
+          <button class="btn btn-primary mt-1" onclick="startGeneralSignup('ipa', currentIPA)">Get This Cover →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BODABODA -->
+<section id="page-bodaboda" class="page">
+  <div class="page-header"><h1>🏍️ Bodaboda Personal Accident</h1><p>Micro-insurance for riders &amp; passengers.</p></div>
+  <div class="alert alert-warn"><span>⚠️</span><div>Flat <strong>KES 100,000 lump sum</strong> for Accidental Death or Permanent Total Disability.</div></div>
+  <div class="grid-2">
+    <div class="product-card bodaboda" style="cursor:default;">
+      <div class="product-icon">🏍️</div><div class="product-name">Individual Rider / Passenger</div>
+      <div class="product-price-tag"><strong>KES 35/month</strong>or KES 350/year</div>
+      <button class="btn btn-primary btn-block" onclick="startGeneralSignup('bodaboda-individual')">Enroll →</button>
+    </div>
+    <div class="product-card bodaboda" style="cursor:default; border-color:var(--bodaboda);">
+      <div class="product-icon">👨‍👩‍👧</div><div class="product-name">Family Package</div>
+      <div class="product-price-tag"><strong>KES 150/month</strong>or KES 1,470/year</div>
+      <button class="btn btn-primary btn-block" onclick="startGeneralSignup('bodaboda-family')">Enroll →</button>
+    </div>
+  </div>
+</section>
+
+<!-- CORPORATE -->
+<section id="page-corporate" class="page">
+  <div class="page-header"><h1>🏢 Corporate WIBA &amp; GPA</h1><p>Statutory WIBA + Group PA for teams of 5+.</p></div>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-header"><h2>Corporate Quote Calculator</h2></div>
+      <div class="card-body">
+        <div class="form-group"><label>Company Name</label><input type="text" id="corpName" placeholder="e.g. Safaricom PLC"></div>
+        <div class="form-group mt-1"><label>Number of Employees</label><input type="number" id="corpEmployees" value="50" min="5" onchange="updateCorporate()"></div>
+        <div class="form-group mt-1"><label>Average Monthly Salary (KES)</label><input type="number" id="corpAvgSalary" value="60000" step="1000" onchange="updateCorporate()"></div>
+        <div class="form-group mt-1"><label>Risk Classification</label>
+          <select id="corpRisk" onchange="updateCorporate()">
+            <option value="0.5">Low — Office (0.5%)</option>
+            <option value="0.75">Light — Sales (0.75%)</option>
+            <option value="1.0" selected>Medium — Transport (1.0%)</option>
+            <option value="1.25">High — Factory (1.25%)</option>
+            <option value="1.5">Very High — Construction (1.5%)</option>
+          </select>
+        </div>
+        <div class="form-group mt-1"><label>Bundle</label>
+          <select id="corpBundle" onchange="updateCorporate()">
+            <option value="wiba-only">WIBA only</option>
+            <option value="wiba-gpa" selected>WIBA + GPA (recommended)</option>
+            <option value="wiba-gpa-health">WIBA + GPA + Health</option>
+          </select>
+        </div>
+        <div style="background:#f0f6f4; border-radius:12px; padding:1.5rem; margin-top:1rem; border:2px solid var(--corporate);">
+          <div class="text-sm text-muted" style="text-transform:uppercase; font-weight:700;">Estimated Annual Premium</div>
+          <div style="font-size:2rem; font-weight:800; color:var(--corporate);" id="corpPremium">KES 360,000</div>
+          <div class="text-sm text-muted" id="corpMeta">50 employees · KES 60,000 avg</div>
+          <button class="btn btn-primary mt-1" onclick="startGeneralSignup('corporate')">Request Formal Quote →</button>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><h2>What's Included</h2></div>
+      <div class="card-body">
+        <div style="margin-bottom:1.25rem;">
+          <div style="font-weight:700; color:var(--primary);">⚖️ WIBA (Work Injury Benefits Act)</div>
+          <ul class="plan-features">
+            <li>Statutory compliance</li>
+            <li>Work injury medical expenses</li>
+            <li>Death &amp; disability compensation</li>
+            <li>Weekly income replacement</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-weight:700; color:var(--primary);">🛡️ Group Personal Accident</div>
+          <ul class="plan-features">
+            <li>24-hour worldwide cover</li>
+            <li>Accidental Death &amp; Dismemberment</li>
+            <li>Permanent Total Disability</li>
+            <li>Emergency evacuation</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HEALTH PLANS -->
+<section id="page-plans" class="page">
+  <div class="page-header"><h1>❤️ Standard Health Plans</h1><p>Comprehensive inpatient and outpatient cover.</p></div>
+  <div class="plans">
+    <div class="plan-card" onclick="startSignup(); setTimeout(()=>{document.getElementById('suPlan').value='essential';},300);">
+      <div class="plan-name">Essential</div>
+      <div class="plan-desc">Individual coverage</div>
+      <div class="plan-price">KSh 500 <small>/month</small></div>
+      <ul class="plan-features">
+        <li>Inpatient up to KSh 500K</li>
+        <li>Outpatient up to KSh 30K</li>
+        <li>24/7 telemedicine</li>
+      </ul>
+      <button class="btn btn-outline btn-block">Select →</button>
+    </div>
+    <div class="plan-card popular" onclick="startSignup(); setTimeout(()=>{document.getElementById('suPlan').value='family';},300);">
+      <div class="plan-name">Family Shield</div>
+      <div class="plan-desc">Spouse + up to 4 children</div>
+      <div class="plan-price">KSh 1,800 <small>/month</small></div>
+      <ul class="plan-features">
+        <li>Inpatient up to KSh 2M</li>
+        <li>Outpatient up to KSh 100K</li>
+        <li>Maternity cover</li>
+        <li>Dental + optical</li>
+      </ul>
+      <button class="btn btn-primary btn-block">Select →</button>
+    </div>
+    <div class="plan-card" onclick="startSignup(); setTimeout(()=>{document.getElementById('suPlan').value='premium';},300);">
+      <div class="plan-name">Premium Plus</div>
+      <div class="plan-desc">Executive + overseas option</div>
+      <div class="plan-price">KSh 4,500 <small>/month</small></div>
+      <ul class="plan-features">
+        <li>Inpatient up to KSh 10M</li>
+        <li>Overseas treatment</li>
+        <li>Private room</li>
+      </ul>
+      <button class="btn btn-outline btn-block">Select →</button>
+    </div>
+  </div>
+</section>
+
+<!-- SIGNUP -->
+<section id="page-signup" class="page">
+  <div class="page-header"><h1 id="signupPageTitle">Sign Up for Coverage</h1><p>Complete the steps below to activate your policy.</p></div>
+
+  <div class="card">
+    <div class="card-body">
+      <div class="steps" id="signupSteps">
+        <div class="step active" data-step="1"><div class="step-circle">1</div><div class="step-label">ID &amp; Details</div></div>
+        <div class="step" data-step="2"><div class="step-circle">2</div><div class="step-label">Verify OTP</div></div>
+        <div class="step" data-step="3"><div class="step-circle">3</div><div class="step-label">Payment</div></div>
+        <div class="step" data-step="4"><div class="step-circle">4</div><div class="step-label">Confirmation</div></div>
+      </div>
+
+      <!-- STEP 1 -->
+      <div id="signupStep1">
+        <h2 style="color:var(--primary); margin-bottom:1rem;">Step 1 — Your Details</h2>
+        <div class="alert alert-info"><span>ℹ️</span><div>Enter your 8-digit National ID. We'll fetch your details from the national registry.</div></div>
+
+        <div class="form-group">
+          <label>National ID Number <span class="req">*</span></label>
+          <div style="display:flex; gap:8px;">
+            <input type="text" id="suId" placeholder="8-digit ID" maxlength="8" style="flex:1;">
+            <button class="btn btn-primary" id="lookupBtn" onclick="lookupId()">Retrieve Details</button>
+          </div>
+          <div class="hint">Test IDs: 12345678 · 23456789 · 11111111 (student) · 55555555 (bodaboda)</div>
+          <div class="error" id="suIdError" style="display:none; color:var(--danger); font-size:0.72rem; margin-top:4px;"></div>
+        </div>
+
+        <div id="suPersonalDetails" style="display:none; margin-top:1.5rem;">
+          <div class="id-card-visual" style="margin-bottom:1.25rem;">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+              <div>
+                <div class="ic-label">Full Name</div>
+                <div class="ic-value" id="icName">—</div>
+                <div class="ic-label">ID Number</div>
+                <div class="ic-value" id="icId">—</div>
+              </div>
+              <div style="text-align:right;">
+                <div class="ic-label">Date of Birth</div>
+                <div class="ic-value" id="icDob">—</div>
+                <div class="ic-label">Gender</div>
+                <div class="ic-value" id="icGender">—</div>
+              </div>
+            </div>
+            <div style="display:flex; justify-content:space-between; margin-top:10px;">
+              <div>
+                <div class="ic-label">County</div>
+                <div class="ic-value" id="icCounty">—</div>
+              </div>
+              <div style="text-align:right;">
+                <div class="ic-label">Citizenship</div>
+                <div class="ic-value" id="icCitizen">Kenyan</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="alert alert-success"><span>✓</span><div><strong>Identity verified.</strong> Details retrieved from national registry.</div></div>
+
+          <!-- STUDENT -->
+          <div id="suStudentFields" style="display:none;">
+            <h3 style="color:#1c7ed6; margin:1.5rem 0 0.75rem; font-size:1rem;">🎓 Student Details</h3>
+            <div class="form-grid">
+              <div class="form-group"><label>Institution <span class="req">*</span></label><input type="text" id="suInstitution"></div>
+              <div class="form-group"><label>Student Reg. No. <span class="req">*</span></label><input type="text" id="suStudentReg"></div>
+              <div class="form-group"><label>Course <span class="req">*</span></label><input type="text" id="suCourse"></div>
+              <div class="form-group"><label>Attachment Employer <span class="req">*</span></label><input type="text" id="suEmployer"></div>
+            </div>
+          </div>
+
+          <!-- BODABODA -->
+          <div id="suBodabodaFields" style="display:none;">
+            <h3 style="color:var(--bodaboda); margin:1.5rem 0 0.75rem; font-size:1rem;">🏍️ Bodaboda Details</h3>
+            <div class="form-grid">
+              <div class="form-group"><label>Motorcycle Reg. <span class="req">*</span></label><input type="text" id="suBikeReg" placeholder="e.g. KMDF 123X"></div>
+              <div class="form-group"><label>County <span class="req">*</span></label><input type="text" id="suBikeCounty"></div>
+              <div class="form-group"><label>Stage / SACCO</label><input type="text" id="suBikeStage"></div>
+            </div>
+          </div>
+
+          <!-- CORPORATE -->
+          <div id="suCorporateFields" style="display:none;">
+            <h3 style="color:var(--corporate); margin:1.5rem 0 0.75rem; font-size:1rem;">🏢 Company Details</h3>
+            <div class="form-grid">
+              <div class="form-group"><label>Company Name <span class="req">*</span></label><input type="text" id="suCompanyName"></div>
+              <div class="form-group"><label>Company Reg. No. <span class="req">*</span></label><input type="text" id="suCompanyReg"></div>
+              <div class="form-group"><label>Employees <span class="req">*</span></label><input type="number" id="suCompanyEmp" min="5"></div>
+              <div class="form-group"><label>Your Designation <span class="req">*</span></label><input type="text" id="suCompanyRole"></div>
+            </div>
+          </div>
+
+          <h3 style="color:var(--primary); margin:1.5rem 0 0.75rem; font-size:1rem;">Contact</h3>
+          <div class="form-grid">
+            <div class="form-group"><label>Email <span class="req">*</span></label><input type="email" id="suEmail"></div>
+            <div class="form-group"><label>Phone <span class="req">*</span></label><input type="tel" id="suPhone"></div>
+          </div>
+
+          <h3 style="color:var(--primary); margin:1.5rem 0 0.75rem; font-size:1rem;">Next of Kin</h3>
+          <div class="form-grid">
+            <div class="form-group"><label>Full Name <span class="req">*</span></label><input type="text" id="suKinName"></div>
+            <div class="form-group"><label>Relationship <span class="req">*</span></label>
+              <select id="suKinRelation"><option value="">Select…</option><option>Spouse</option><option>Parent</option><option>Sibling</option><option>Child</option><option>Guardian</option><option>Other</option></select>
+            </div>
+            <div class="form-group"><label>Phone</label><input type="tel" id="suKinPhone"></div>
+            <div class="form-group"><label>ID Number</label><input type="text" id="suKinId"></div>
+          </div>
+
+          <h3 style="color:var(--primary); margin:1.5rem 0 0.75rem; font-size:1rem;">Plan Selection</h3>
+          <div class="form-group">
+            <label>Choose Your Plan</label>
+            <select id="suPlan" onchange="onPlanChange()">
+              <option value="">— Health Plans —</option>
+              <option value="essential">Essential — KSh 500/month</option>
+              <option value="family" selected>Family Shield — KSh 1,800/month</option>
+              <option value="premium">Premium Plus — KSh 4,500/month</option>
+              <option value="">— General —</option>
+              <option value="individual-pa">Standard Individual PA</option>
+              <option value="bodaboda-individual">Bodaboda Individual — KES 35/mo or 350/yr</option>
+              <option value="bodaboda-family">Bodaboda Family — KES 150/mo or 1,470/yr</option>
+              <option value="student-bronze">🎓 Student Bronze</option>
+              <option value="student-silver">🎓 Student Silver</option>
+              <option value="student-gold">🎓 Student Gold</option>
+              <option value="">— Corporate —</option>
+              <option value="corporate">🏢 Corporate WIBA + GPA</option>
+            </select>
+          </div>
+
+          <div class="form-group" id="suStudentTermGroup" style="display:none;">
+            <label>Student Term</label>
+            <select id="suStudentTerm"><option value="3">3 Months</option><option value="6" selected>6 Months</option><option value="12">12 Months</option></select>
+          </div>
+
+          <div class="form-group" id="suBodabodaTermGroup" style="display:none;">
+            <label>Bodaboda Term</label>
+            <select id="suBodabodaTerm"><option value="monthly">Monthly</option><option value="annual" selected>Annual (save 17%)</option></select>
+          </div>
+
+          <div class="form-group" id="suBillingFreqGroup">
+            <label>Billing Frequency</label>
+            <select id="suBillingFreq"><option value="monthly" selected>Monthly</option><option value="quarterly">Quarterly (−2%)</option><option value="annual">Annual (−5%)</option></select>
+          </div>
+
+          <h3 style="color:var(--primary); margin:1.5rem 0 0.75rem; font-size:1rem;">Payment Method</h3>
+          <div class="payment-options" id="suPaymentOptions">
+            <div class="pay-option" data-method="mpesa" onclick="selectPayment('mpesa')"><div class="pay-icon">📱</div><div class="pay-name">M-Pesa</div><div class="pay-desc">Safaricom</div></div>
+            <div class="pay-option" data-method="airtel" onclick="selectPayment('airtel')"><div class="pay-icon">📲</div><div class="pay-name">Airtel Money</div><div class="pay-desc">Airtel</div></div>
+            <div class="pay-option" data-method="card" onclick="selectPayment('card')"><div class="pay-icon">💳</div><div class="pay-name">Card</div><div class="pay-desc">Visa/MC</div></div>
+            <div class="pay-option" data-method="bank" onclick="selectPayment('bank')"><div class="pay-icon">🏦</div><div class="pay-name">Bank</div><div class="pay-desc">Transfer</div></div>
+          </div>
+
+          <div class="flex-between mt-2">
+            <button class="btn btn-outline" onclick="showPage('home')">Cancel</button>
+            <button class="btn btn-primary" onclick="submitStep1()">Continue →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 2 -->
+      <div id="signupStep2" style="display:none;">
+        <h2 style="color:var(--primary); margin-bottom:1rem;">Step 2 — Verify Your Identity</h2>
+        <div class="alert alert-info"><span>📩</span><div id="otpSentMsg">We've sent a 6-digit code.</div></div>
+        <div class="otp-meta">
+          <div>Expires: <span class="otp-timer" id="otpTimer">05:00</span></div>
+          <div>Attempts: <strong id="otpAttempts">0 / 3</strong></div>
+        </div>
+        <div class="otp-inputs" id="otpInputs">
+          <input type="text" maxlength="1" inputmode="numeric"><input type="text" maxlength="1" inputmode="numeric">
+          <input type="text" maxlength="1" inputmode="numeric"><input type="text" maxlength="1" inputmode="numeric">
+          <input type="text" maxlength="1" inputmode="numeric"><input type="text" maxlength="1" inputmode="numeric">
+        </div>
+        <div class="text-center">
+          <button class="btn btn-outline btn-sm" onclick="resendOtp()">Resend</button>
+          <button class="btn btn-outline btn-sm" onclick="showDemoOtp()">Show Demo OTP</button>
+        </div>
+        <div class="flex-between mt-2">
+          <button class="btn btn-outline" onclick="backToStep1()">← Back</button>
+          <button class="btn btn-primary" onclick="verifyOtp()">Verify →</button>
+        </div>
+      </div>
+
+      <!-- STEP 3 -->
+      <div id="signupStep3" style="display:none;">
+        <h2 style="color:var(--primary); margin-bottom:1rem;">Step 3 — Payment</h2>
+        <div class="grid-2">
+          <div class="card" style="margin-bottom:0;">
+            <div class="card-header"><h2>Summary</h2></div>
+            <div class="card-body">
+              <div class="flex-between" style="padding:8px 0; border-bottom:1px solid var(--border);"><span class="text-sm text-muted">Member</span><strong id="payName">—</strong></div>
+              <div class="flex-between" style="padding:8px 0; border-bottom:1px solid var(--border);"><span class="text-sm text-muted">Product</span><strong id="payPlan">—</strong></div>
+              <div class="flex-between" style="padding:8px 0; border-bottom:1px solid var(--border);"><span class="text-sm text-muted">Term</span><strong id="payTerm">—</strong></div>
+              <div class="flex-between" style="padding:8px 0;"><span class="text-sm text-muted">Total</span><strong style="font-size:1.4rem; color:var(--primary);" id="payAmount">—</strong></div>
+            </div>
+          </div>
+          <div class="card" style="margin-bottom:0;">
+            <div class="card-header"><h2>Payment</h2></div>
+            <div class="card-body" id="paymentDetails">
+              <div class="alert alert-info"><span>📱</span><div>Click Pay to complete.</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="flex-between mt-2">
+          <button class="btn btn-outline" onclick="backToStep2()">← Back</button>
+          <button class="btn btn-primary" id="payBtn" onclick="processPayment()">Pay &amp; Activate</button>
+        </div>
+      </div>
+
+      <!-- STEP 4 -->
+      <div id="signupStep4" style="display:none;">
+        <div class="text-center" style="padding:1rem 0;">
+          <div class="success-burst">✓</div>
+          <h2 style="color:var(--success); font-size:1.6rem;">Policy Activated!</h2>
+        </div>
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-header"><h2>Your Policy</h2></div>
+            <div class="card-body">
+              <div class="flex-between" style="padding:8px 0; border-bottom:1px solid var(--border);"><span class="text-sm text-muted">Policy No.</span><strong style="font-family:'Courier New',monospace; color:var(--primary);" id="confPolicy">—</strong></div>
+              <div class="flex-between" style="padding:8px 0; border-bottom:1px solid var(--border);"><span class="text-sm text-muted">Member ID</span><strong id="confMember">—</strong></div>
+              <div class="flex-between" style="padding:8px 0; border-bottom:1px solid var(--border);"><span class="text-sm text-muted">Cover Start</span><strong id="confStart">—</strong></div>
+              <div class="flex-between" style="padding:8px 0; border-bottom:1px solid var(--border);"><span class="text-sm text-muted">Cover End</span><strong id="confEnd">—</strong></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header"><h2>Login Credentials</h2></div>
+            <div class="card-body">
+              <div class="alert alert-warn"><span>🔐</span><div>Save these. Change password on first login.</div></div>
+              <div class="form-group"><label>Email</label><input type="text" id="confEmail" readonly></div>
+              <div class="form-group mt-1"><label>Default Password</label><input type="text" id="confPass" readonly style="font-family:'Courier New',monospace; font-weight:800; letter-spacing:2px;"></div>
+              <button class="btn btn-primary btn-block mt-2" onclick="goToMemberPortal()">Go to Member Portal →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MEMBER PORTAL -->
+<section id="page-member" class="page">
+  <div style="background:linear-gradient(135deg,var(--primary),var(--primary-light)); color:#fff; border-radius:18px; padding:2rem; margin-bottom:1.5rem;">
+    <div class="flex-between">
+      <div>
+        <h2 style="font-size:1.4rem; font-weight:800;">Karibu, <span id="memberName">—</span></h2>
+        <p style="opacity:0.9;">Your Moseti dashboard</p>
+        <div style="font-family:'Courier New',monospace; font-size:1rem; font-weight:700; background:rgba(255,255,255,0.15); padding:6px 14px; border-radius:8px; display:inline-block; margin-top:12px;" id="memberPolicy">—</div>
+      </div>
+      <button class="btn btn-outline btn-sm" style="background:rgba(255,255,255,0.15); color:#fff; border-color:rgba(255,255,255,0.3);" onclick="doLogout()">Sign Out</button>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('overview', this)">Overview</button>
+    <button class="tab" onclick="switchTab('billing', this)">Billing</button>
+    <button class="tab" onclick="switchTab('claims', this)">Claims</button>
+    <button class="tab" onclick="switchTab('inbox', this)">Notifications <span class="nav-badge" id="inboxBadge" style="display:none;">0</span></button>
+    <button class="tab" onclick="switchTab('account', this)">Account</button>
+  </div>
+
+  <div id="memberTab-overview" class="member-tab">
+    <div class="stats-grid">
+      <div class="stat-card"><div class="label">Status</div><div class="value" style="color:var(--success);">Active</div><div class="sub" id="mCoverDates">—</div></div>
+      <div class="stat-card"><div class="label">Product</div><div class="value" style="font-size:1.2rem;" id="mPlan">—</div><div class="sub" id="mPlanSub">—</div></div>
+      <div class="stat-card"><div class="label">Next Payment</div><div class="value" style="font-size:1.4rem;" id="mNextDue">—</div><div class="sub" id="mNextAmount">—</div></div>
+      <div class="stat-card"><div class="label">Open Claims</div><div class="value" id="mOpenClaims">0</div><div class="sub">Awaiting decision</div></div>
+    </div>
+    <div class="grid-2">
+      <div class="card"><div class="card-header"><h2>Recent Activity</h2></div><div class="card-body" id="mActivity">—</div></div>
+      <div class="card"><div class="card-header"><h2>Quick Actions</h2></div><div class="card-body">
+        <button class="btn btn-primary btn-block" style="margin-bottom:10px;" onclick="switchTabByName('claims')">📄 File a Claim</button>
+        <button class="btn btn-outline btn-block" onclick="switchTabByName('account')">🔐 Change Password</button>
+      </div></div>
+    </div>
+  </div>
+
+  <div id="memberTab-billing" class="member-tab" style="display:none;">
+    <div class="card">
+      <div class="card-header"><h2>Billing History</h2><button class="btn btn-sm btn-primary" onclick="payNextCycle()">Pay Next →</button></div>
+      <div class="card-body" id="billingList">—</div>
+    </div>
+  </div>
+
+  <div id="memberTab-claims" class="member-tab" style="display:none;">
+    <div class="flex-between" style="margin-bottom:1rem;">
+      <div class="text-muted text-sm">Track your claims</div>
+      <button class="btn btn-primary btn-sm" onclick="openClaimModal()">+ File Claim</button>
+    </div>
+    <div class="card"><div class="card-body" id="claimsList">—</div></div>
+  </div>
+
+  <div id="memberTab-inbox" class="member-tab" style="display:none;">
+    <div class="card"><div class="card-body" id="inboxList">—</div></div>
+  </div>
+
+  <div id="memberTab-account" class="member-tab" style="display:none;">
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-header"><h2>Personal Details</h2></div>
+        <div class="card-body" id="accountDetails">—</div>
+      </div>
+      <div class="card">
+        <div class="card-header"><h2>Security</h2></div>
+        <div class="card-body">
+          <button class="btn btn-outline btn-block" onclick="changePasswordPrompt()">🔐 Change Password</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <strong>Moseti Insurance</strong> — Running on Node.js + SQLite<br>
+  Customer Care: <a href="tel:0743663951">📞 0743663951</a>
+  &nbsp;·&nbsp;
+  <a href="mailto:michaelmoseti49@gmail.com">✉️ michaelmoseti49@gmail.com</a>
+  <br><span style="font-size:0.72rem;">Mon–Sat, 8:00 AM – 6:00 PM EAT · Emergency line 24/7 for active claims</span>
+</footer>
+
+<!-- CUSTOMER CARE WIDGET -->
+<div id="careWidget" style="position:fixed; bottom:20px; right:20px; z-index:9998;">
+  <button onclick="toggleCarePanel()" style="background:var(--primary); color:#fff; border:none; border-radius:50px; padding:14px 20px; font-size:0.9rem; font-weight:700; cursor:pointer; box-shadow:0 8px 24px rgba(13,79,79,0.4); display:flex; align-items:center; gap:8px; font-family:inherit;">
+    <span style="font-size:1.2rem;">💬</span>
+    <span>Customer Care</span>
+  </button>
+  <div id="carePanel" style="display:none; position:absolute; bottom:70px; right:0; width:320px; background:#fff; border-radius:16px; box-shadow:0 20px 60px rgba(0,0,0,0.25); padding:1.5rem; border:1px solid var(--border);">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+      <div style="font-weight:800; color:var(--primary); font-size:1rem;">Moseti Customer Care</div>
+      <button onclick="toggleCarePanel()" style="background:none; border:none; font-size:1.2rem; cursor:pointer; color:var(--text-muted);">×</button>
+    </div>
+    <div style="background:#f0f6f4; border-radius:10px; padding:1rem; margin-bottom:1rem; font-size:0.82rem; color:var(--text-muted);">
+      We're here to help. Reach us through any of these channels:
+    </div>
+    <a href="tel:0743663951" style="display:flex; align-items:center; gap:12px; padding:12px; border-radius:10px; background:linear-gradient(135deg,#0d4f4f,#1a7a7a); color:#fff; text-decoration:none; margin-bottom:10px; font-weight:600;">
+      <span style="font-size:1.4rem;">📞</span>
+      <div><div style="font-size:0.7rem; opacity:0.85; text-transform:uppercase;">Call Us</div><div style="font-size:1rem; font-weight:800;">0743663951</div></div>
+    </a>
+    <a href="mailto:michaelmoseti49@gmail.com" style="display:flex; align-items:center; gap:12px; padding:12px; border-radius:10px; background:linear-gradient(135deg,var(--corporate),#3b82f6); color:#fff; text-decoration:none; margin-bottom:10px; font-weight:600;">
+      <span style="font-size:1.4rem;">✉️</span>
+      <div><div style="font-size:0.7rem; opacity:0.85; text-transform:uppercase;">Email Us</div><div style="font-size:0.78rem; font-weight:800;">michaelmoseti49@gmail.com</div></div>
+    </a>
+    <a href="https://wa.me/254743663951" target="_blank" style="display:flex; align-items:center; gap:12px; padding:12px; border-radius:10px; background:linear-gradient(135deg,#25D366,#128C7E); color:#fff; text-decoration:none; margin-bottom:10px; font-weight:600;">
+      <span style="font-size:1.4rem;">💚</span>
+      <div><div style="font-size:0.7rem; opacity:0.85; text-transform:uppercase;">WhatsApp</div><div style="font-size:1rem; font-weight:800;">+254 743 663 951</div></div>
+    </a>
+    <div style="font-size:0.72rem; color:var(--text-muted); text-align:center; margin-top:1rem; padding-top:1rem; border-top:1px solid var(--border);">
+      Mon–Sat · 8:00 AM – 6:00 PM EAT<br>Emergency line available 24/7
+    </div>
+  </div>
+</div>
+
+<!-- MODALS -->
+<div class="modal-overlay" id="loginModal">
+  <div class="modal">
+    <div class="modal-header"><h3>Member Login</h3><button class="modal-close" onclick="closeModal('loginModal')">&times;</button></div>
+    <div class="modal-body">
+      <div class="form-group"><label>Email</label><input type="email" id="loginEmail"></div>
+      <div class="form-group mt-1"><label>Password</label><input type="password" id="loginPassword"></div>
+      <div id="loginError" style="display:none; color:var(--danger); font-size:0.8rem; margin-top:6px;"></div>
+      <button class="btn btn-primary btn-block mt-2" onclick="doLogin()">Sign In</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="claimModal">
+  <div class="modal modal-lg">
+    <div class="modal-header"><h3>File a New Claim</h3><button class="modal-close" onclick="closeModal('claimModal')">&times;</button></div>
+    <div class="modal-body">
+      <div class="form-group"><label>Claim Type <span class="req">*</span></label>
+        <select id="claimType">
+          <option value="outpatient">Outpatient</option><option value="inpatient">Inpatient</option>
+          <option value="maternity">Maternity</option><option value="dental">Dental</option>
+          <option value="optical">Optical</option><option value="accidental">Accidental</option>
+        </select>
+      </div>
+      <div class="form-grid mt-1">
+        <div class="form-group"><label>Service Date <span class="req">*</span></label><input type="date" id="claimDate"></div>
+        <div class="form-group"><label>Provider <span class="req">*</span></label><input type="text" id="claimProvider"></div>
+        <div class="form-group"><label>Amount <span class="req">*</span></label><input type="number" id="claimAmount"></div>
+        <div class="form-group"><label>Receipt No.</label><input type="text" id="claimReceipt"></div>
+      </div>
+      <div class="form-group mt-1"><label>Description</label><textarea id="claimDesc" rows="3"></textarea></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('claimModal')">Cancel</button>
+      <button class="btn btn-primary" onclick="submitClaim()">Submit</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="adminModal">
+  <div class="modal modal-lg">
+    <div class="modal-header"><h3>Admin — Registered Members</h3><button class="modal-close" onclick="closeModal('adminModal')">&times;</button></div>
+    <div class="modal-body">
+      <div class="alert alert-info"><span>📊</span><div>All members from <strong>moseti.db</strong>. Data is persistent.</div></div>
+      <div class="table-wrap">
+        <table><thead><tr><th>Member ID</th><th>Name</th><th>Email</th><th>Product</th><th>Status</th><th>Actions</th></tr></thead>
+        <tbody id="adminTable"><tr><td colspan="6" class="text-center text-muted">Loading…</td></tr></tbody></table>
+      </div>
+      <div class="flex-between mt-2">
+        <button class="btn btn-outline btn-sm" onclick="clearAllMembers()">Clear All</button>
+        <button class="btn btn-primary" onclick="closeModal('adminModal')">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+let signupState = {};
+let currentMember = null;
+let currentIPA = { sum: 250000, medical: 100000, risk: 1, premium: 1282 };
+let studentPricingMode = 'individual';
+let selectedStudentTier = null;
+let selectedStudentTerm = null;
+let selectedPaymentMethod = null;
+let demoOtp = null;
+let otpTimerInterval = null;
+
+const studentPlans = {
+  'student-gold':   { tier:'Gold',   ind:{3:272,6:544,12:1088}, inst:{3:160,6:319,12:638}, benefits:{am:150000,pd:300000,ad:100000} },
+  'student-silver': { tier:'Silver', ind:{3:208,6:416,12:832},  inst:{3:128,6:254,12:509}, benefits:{am:100000,pd:200000,ad:100000} },
+  'student-bronze': { tier:'Bronze', ind:{3:144,6:288,12:576},  inst:{3:95,6:190,12:380},  benefits:{am:75000,pd:100000,ad:75000} }
+};
+const bodabodaPlans = {
+  'bodaboda-individual': { name:'Bodaboda Individual', monthly:35,  annual:350,  benefit:100000 },
+  'bodaboda-family':     { name:'Bodaboda Family',     monthly:150, annual:1470, benefit:100000 }
+};
+const planPrices = { essential:500, family:1800, premium:4500 };
+const planNames  = { essential:'Essential', family:'Family Shield', premium:'Premium Plus' };
+
+function toast(msg) {
+  const t = document.createElement('div');
+  t.textContent = msg;
+  t.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#0d4f4f;color:#fff;padding:12px 24px;border-radius:10px;font-size:0.85rem;font-weight:600;box-shadow:0 8px 32px rgba(0,0,0,0.25);z-index:99999;opacity:0;transition:opacity 0.3s;';
+  document.body.appendChild(t);
+  requestAnimationFrame(() => t.style.opacity = '1');
+  setTimeout(() => { t.style.opacity = '0'; setTimeout(() => t.remove(), 300); }, 2600);
+}
+function openModal(id) { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+function showPage(id, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + id)?.classList.add('active');
+  document.querySelectorAll('.top-nav button').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+  if (id === 'home') refreshMemberCount();
+}
+function fmtKes(n) { return 'KES ' + Number(n).toLocaleString('en-KE'); }
+function toggleCarePanel() {
+  const p = document.getElementById('carePanel');
+  p.style.display = p.style.display === 'none' ? 'block' : 'none';
+}
+document.addEventListener('click', (e) => {
+  const widget = document.getElementById('careWidget');
+  if (widget && !widget.contains(e.target)) {
+    const p = document.getElementById('carePanel');
+    if (p) p.style.display = 'none';
+  }
+});
+document.querySelectorAll('.modal-overlay').forEach(o => { o.addEventListener('click', e => { if (e.target === o) o.classList.remove('open'); }); });
+
+async function api(path, options = {}) {
+  const res = await fetch(path, {
+    headers: { 'Content-Type': 'application/json' },
+    ...options,
+    body: options.body ? JSON.stringify(options.body) : undefined
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error || 'Request failed');
+  return data;
+}
+
+async function refreshMemberCount() {
+  try {
+    const data = await api('/api/members');
+    document.getElementById('statMembers').textContent = (data.count + 1247).toLocaleString();
+  } catch {}
+}
+
+function switchStudentPricing(mode) {
+  studentPricingMode = mode;
+  document.getElementById('btnIndividual').classList.toggle('active', mode === 'individual');
+  document.getElementById('btnInstitutional').classList.toggle('active', mode === 'institutional');
+  document.getElementById('btnInstitutional').classList.toggle('inst', mode === 'institutional');
+  document.getElementById('institutionalNote').style.display = mode === 'institutional' ? 'flex' : 'none';
+  document.getElementById('studentPremiumsTitle').textContent = mode === 'individual' ? 'Individual Student Premiums' : 'Institutional Group Rates (per student)';
+  renderStudentPriceRows();
+  renderStudentPremTable();
+  if (selectedStudentTier && selectedStudentTerm) renderStudentSummary();
+}
+function renderStudentPriceRows() {
+  ['gold','silver','bronze'].forEach(tier => {
+    const row = document.getElementById(tier + 'PriceRow');
+    const sp = studentPlans['student-' + tier];
+    const prices = studentPricingMode === 'individual' ? sp.ind : sp.inst;
+    row.innerHTML = `
+      <button class="tier-price-btn" onclick="selectStudentPrice(event,'${tier}',3,${prices[3]})"><div class="tp-term">3 Months</div><div class="tp-amt">KES ${prices[3]}</div></button>
+      <button class="tier-price-btn" onclick="selectStudentPrice(event,'${tier}',6,${prices[6]})"><div class="tp-term">6 Months</div><div class="tp-amt">KES ${prices[6]}</div></button>
+      <button class="tier-price-btn" onclick="selectStudentPrice(event,'${tier}',12,${prices[12]})"><div class="tp-term">12 Months</div><div class="tp-amt">KES ${prices[12]}</div></button>`;
+  });
+}
+function renderStudentPremTable() {
+  const rows = [{l:'3 Months',k:3},{l:'6 Months',k:6},{l:'12 Months',k:12}];
+  document.getElementById('studentPremTbody').innerHTML = rows.map(r => {
+    const mode = studentPricingMode;
+    const g = mode === 'individual' ? studentPlans['student-gold'].ind[r.k] : studentPlans['student-gold'].inst[r.k];
+    const s = mode === 'individual' ? studentPlans['student-silver'].ind[r.k] : studentPlans['student-silver'].inst[r.k];
+    const b = mode === 'individual' ? studentPlans['student-bronze'].ind[r.k] : studentPlans['student-bronze'].inst[r.k];
+    return `<tr><td>${r.l}</td><td class="num">KES ${g}</td><td class="num">KES ${s}</td><td class="num">KES ${b}</td></tr>`;
+  }).join('');
+}
+function selectTierCard(tier) {
+  document.querySelectorAll('.tier-card').forEach(c => c.classList.remove('selected'));
+  document.querySelector(`.tier-card.${tier}`)?.classList.add('selected');
+  selectedStudentTier = tier;
+  if (selectedStudentTerm) renderStudentSummary();
+}
+function selectStudentPrice(e, tier, term, price) {
+  e.stopPropagation();
+  document.querySelectorAll('.tier-price-btn').forEach(b => b.classList.remove('selected'));
+  e.currentTarget.classList.add('selected');
+  selectedStudentTier = tier;
+  selectedStudentTerm = term;
+  renderStudentSummary();
+}
+function renderStudentSummary() {
+  const sp = studentPlans['student-' + selectedStudentTier];
+  const price = studentPricingMode === 'individual' ? sp.ind[selectedStudentTerm] : sp.inst[selectedStudentTerm];
+  document.getElementById('studentSelectionSummary').innerHTML = `
+    <div class="grid-2">
+      <div>
+        <div class="flex-between" style="padding:8px 0; border-bottom:1px solid var(--border);"><span class="text-sm text-muted">Tier</span><strong>${sp.tier}</strong></div>
+        <div class="flex-between" style="padding:8px 0; border-bottom:1px solid var(--border);"><span class="text-sm text-muted">Pricing</span><strong>${studentPricingMode === 'individual' ? 'Individual' : 'Group'}</strong></div>
+        <div class="flex-between" style="padding:8px 0;"><span class="text-sm text-muted">Term</span><strong>${selectedStudentTerm} months</strong></div>
+      </div>
+      <div style="background:#f0f6f4; border-radius:12px; padding:1.5rem; text-align:center;">
+        <div class="text-sm text-muted" style="text-transform:uppercase; font-weight:700;">Total</div>
+        <div style="font-size:2.4rem; font-weight:800; color:var(--primary);">${fmtKes(price)}</div>
+        <button class="btn btn-accent mt-1" onclick="startStudentSignup('${selectedStudentTier}', ${selectedStudentTerm})" style="width:100%; justify-content:center;">Enroll Now →</button>
+      </div>
+    </div>`;
+}
+function startStudentSignup(tier, term) {
+  startSignup();
+  signupState.isStudent = true;
+  signupState.studentTerm = term || 6;
+  signupState.studentPricingMode = studentPricingMode;
+  document.getElementById('signupPageTitle').textContent = '🎓 Student Attachment Sign Up';
+  document.getElementById('suStudentFields').style.display = 'block';
+  document.getElementById('suStudentTermGroup').style.display = 'block';
+  document.getElementById('suBillingFreqGroup').style.display = 'none';
+  document.getElementById('suPlan').value = 'student-' + (tier || 'silver');
+  document.getElementById('suStudentTerm').value = term || 6;
+}
+function updateIPA() {
+  const sum = parseFloat(document.getElementById('ipaSum').value);
+  const med = parseFloat(document.getElementById('ipaMedical').value);
+  const risk = parseFloat(document.getElementById('ipaRisk').value);
+  const premium = Math.round(1282 * (sum / 250000) * (0.85 + (med / 100000) * 0.15) * risk);
+  currentIPA = { sum, medical: med, risk, premium };
+  document.getElementById('ipaPremium').textContent = fmtKes(premium);
+}
+function updateCorporate() {
+  const emp = parseInt(document.getElementById('corpEmployees').value) || 50;
+  const salary = parseFloat(document.getElementById('corpAvgSalary').value) || 60000;
+  const rate = parseFloat(document.getElementById('corpRisk').value) / 100;
+  const bundle = document.getElementById('corpBundle').value;
+  let mult = 1;
+  if (bundle === 'wiba-gpa') mult = 1.6;
+  else if (bundle === 'wiba-gpa-health') mult = 5.0;
+  const premium = Math.round(emp * salary * 12 * rate * mult);
+  document.getElementById('corpPremium').textContent = fmtKes(premium);
+  document.getElementById('corpMeta').textContent = `${emp} employees · ${fmtKes(salary)} avg`;
+  return premium;
+}
+function startSignup() {
+  signupState = {};
+  document.getElementById('suId').value = '';
+  document.getElementById('suPersonalDetails').style.display = 'none';
+  ['suStudentFields','suBodabodaFields','suCorporateFields'].forEach(id => document.getElementById(id).style.display = 'none');
+  document.getElementById('suStudentTermGroup').style.display = 'none';
+  document.getElementById('suBodabodaTermGroup').style.display = 'none';
+  document.getElementById('suBillingFreqGroup').style.display = 'block';
+  document.getElementById('signupPageTitle').textContent = 'Sign Up for Coverage';
+  document.getElementById('signupStep1').style.display = 'block';
+  document.getElementById('signupStep2').style.display = 'none';
+  document.getElementById('signupStep3').style.display = 'none';
+  document.getElementById('signupStep4').style.display = 'none';
+  document.querySelectorAll('#suPaymentOptions .pay-option').forEach(o => o.classList.remove('selected'));
+  selectedPaymentMethod = null;
+  setStep(1);
+  showPage('signup');
+}
+function startGeneralSignup(type, extra) {
+  startSignup();
+  if (type === 'ipa') {
+    signupState.isIndividualPA = true;
+    signupState.plan = 'individual-pa';
+    signupState.planPrice = extra.premium;
+    document.getElementById('suPlan').value = 'individual-pa';
+    document.getElementById('suBillingFreqGroup').style.display = 'none';
+  } else if (type === 'bodaboda-individual' || type === 'bodaboda-family') {
+    signupState.isBodaboda = true;
+    document.getElementById('suPlan').value = type;
+    document.getElementById('suBodabodaFields').style.display = 'block';
+    document.getElementById('suBodabodaTermGroup').style.display = 'block';
+    document.getElementById('suBillingFreqGroup').style.display = 'none';
+  } else if (type === 'corporate') {
+    signupState.isCorporate = true;
+    document.getElementById('suPlan').value = 'corporate';
+    document.getElementById('suCorporateFields').style.display = 'block';
+    document.getElementById('suBillingFreqGroup').style.display = 'none';
+    signupState.planPrice = updateCorporate();
+  }
+}
+function setStep(n) {
+  document.querySelectorAll('#signupSteps .step').forEach(s => {
+    const sn = parseInt(s.dataset.step);
+    s.classList.toggle('active', sn === n);
+    s.classList.toggle('done', sn < n);
+  });
+}
+async function lookupId() {
+  const id = document.getElementById('suId').value.trim();
+  const errEl = document.getElementById('suIdError');
+  if (id.length !== 8) { errEl.textContent = 'ID must be 8 digits'; errEl.style.display = 'block'; return; }
+  errEl.style.display = 'none';
+  const btn = document.getElementById('lookupBtn');
+  btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> Fetching…';
+  try {
+    const data = await api('/api/registry/' + id);
+    const p = data.person;
+    signupState.person = p;
+    signupState.nationalId = id;
+    document.getElementById('icName').textContent = p.fullName;
+    document.getElementById('icId').textContent = p.id;
+    document.getElementById('icDob').textContent = p.dob;
+    document.getElementById('icGender').textContent = p.gender;
+    document.getElementById('icCounty').textContent = p.county;
+    document.getElementById('suPersonalDetails').style.display = 'block';
+    document.getElementById('suEmail').value = p.email || '';
+    document.getElementById('suPhone').value = p.phone || '';
+    if (p.student && !signupState.isStudent && !signupState.isBodaboda && !signupState.isCorporate && !signupState.isIndividualPA) {
+      signupState.isStudent = true;
+      document.getElementById('signupPageTitle').textContent = '🎓 Student Attachment Sign Up';
+      document.getElementById('suStudentFields').style.display = 'block';
+      document.getElementById('suStudentTermGroup').style.display = 'block';
+      document.getElementById('suBillingFreqGroup').style.display = 'none';
+      if (!document.getElementById('suPlan').value.startsWith('student-')) document.getElementById('suPlan').value = 'student-silver';
+      if (p.institution) document.getElementById('suInstitution').value = p.institution;
+      if (p.regNo) document.getElementById('suStudentReg').value = p.regNo;
+      if (p.course) document.getElementById('suCourse').value = p.course;
+      toast('Student record found');
+    } else {
+      toast('Details retrieved');
+    }
+    if (data.alreadyRegistered) {
+      toast('⚠️ This ID is already registered — member ' + data.existingMember.member_id);
+    }
+  } catch (e) {
+    errEl.textContent = e.message;
+    errEl.style.display = 'block';
+  } finally {
+    btn.disabled = false; btn.textContent = 'Retrieve Details';
+  }
+}
+function onPlanChange() {
+  const plan = document.getElementById('suPlan').value;
+  const isStudent = plan.startsWith('student-');
+  const isBodaboda = plan.startsWith('bodaboda-');
+  const isCorporate = plan === 'corporate';
+  const isIPA = plan === 'individual-pa';
+  document.getElementById('suStudentTermGroup').style.display = isStudent ? 'block' : 'none';
+  document.getElementById('suBodabodaTermGroup').style.display = isBodaboda ? 'block' : 'none';
+  document.getElementById('suBillingFreqGroup').style.display = (!isStudent && !isBodaboda && !isCorporate && !isIPA && plan) ? 'block' : 'none';
+  if (document.getElementById('suPersonalDetails').style.display !== 'none') {
+    document.getElementById('suStudentFields').style.display = isStudent ? 'block' : 'none';
+    document.getElementById('suBodabodaFields').style.display = isBodaboda ? 'block' : 'none';
+    document.getElementById('suCorporateFields').style.display = isCorporate ? 'block' : 'none';
+  }
+}
+function selectPayment(method) {
+  selectedPaymentMethod = method;
+  document.querySelectorAll('#suPaymentOptions .pay-option').forEach(o => o.classList.toggle('selected', o.dataset.method === method));
+}
+async function submitStep1() {
+  const email = document.getElementById('suEmail').value.trim();
+  const phone = document.getElementById('suPhone').value.trim();
+  const kinName = document.getElementById('suKinName').value.trim();
+  const kinRelation = document.getElementById('suKinRelation').value;
+  const plan = document.getElementById('suPlan').value;
+  if (!plan) return toast('Select a plan');
+  if (!email || !email.includes('@')) return toast('Valid email required');
+  if (!phone || phone.length < 9) return toast('Valid phone required');
+  if (!kinName) return toast('Next of kin name required');
+  if (!kinRelation) return toast('Select kin relationship');
+  if (!selectedPaymentMethod) return toast('Select payment method');
+
+  signupState.email = email;
+  signupState.phone = phone;
+  signupState.kin = { name: kinName, relationship: kinRelation, phone: document.getElementById('suKinPhone').value.trim(), id: document.getElementById('suKinId').value.trim() };
+  signupState.plan = plan;
+  signupState.paymentMethod = selectedPaymentMethod;
+
+  let planName, planPrice, termLabel, productType;
+  const isStudent = plan.startsWith('student-');
+  const isBodaboda = plan.startsWith('bodaboda-');
+  const isCorporate = plan === 'corporate';
+  const isIPA = plan === 'individual-pa';
+
+  if (isStudent) {
+    const inst = document.getElementById('suInstitution').value.trim();
+    const reg = document.getElementById('suStudentReg').value.trim();
+    const course = document.getElementById('suCourse').value.trim();
+    const employer = document.getElementById('suEmployer').value.trim();
+    if (!inst || !reg || !course || !employer) return toast('Fill all student fields');
+    const term = parseInt(document.getElementById('suStudentTerm').value);
+    const sp = studentPlans[plan];
+    const price = studentPricingMode === 'individual' ? sp.ind[term] : sp.inst[term];
+    planName = 'Student ' + sp.tier;
+    planPrice = price;
+    termLabel = term + ' months';
+    productType = 'student';
+    signupState.student = { institution: inst, regNo: reg, course, employer };
+    signupState.studentTerm = term;
+  } else if (isBodaboda) {
+    const bikeReg = document.getElementById('suBikeReg').value.trim();
+    const county = document.getElementById('suBikeCounty').value.trim();
+    if (!bikeReg || !county) return toast('Fill bodaboda fields');
+    const term = document.getElementById('suBodabodaTerm').value;
+    const bp = bodabodaPlans[plan];
+    planPrice = term === 'monthly' ? bp.monthly : bp.annual;
+    planName = bp.name;
+    termLabel = term === 'monthly' ? 'Monthly' : 'Annual';
+    productType = 'bodaboda';
+    signupState.bodaboda = { bikeReg, county, stage: document.getElementById('suBikeStage').value.trim() };
+    signupState.bodabodaTerm = term;
+  } else if (isCorporate) {
+    const companyName = document.getElementById('suCompanyName').value.trim();
+    const companyReg = document.getElementById('suCompanyReg').value.trim();
+    const emp = parseInt(document.getElementById('suCompanyEmp').value);
+    const role = document.getElementById('suCompanyRole').value.trim();
+    if (!companyName || !companyReg || !emp || emp < 5 || !role) return toast('Fill all corporate fields (min 5 employees)');
+    planPrice = updateCorporate();
+    planName = 'Corporate WIBA + GPA';
+    termLabel = 'Annual';
+    productType = 'corporate';
+    signupState.corporate = { companyName, companyReg, employeeCount: emp, role };
+  } else if (isIPA) {
+    planPrice = currentIPA.premium || 1282;
+    planName = 'Standard Individual PA';
+    termLabel = 'Annual';
+    productType = 'general';
+  } else {
+    const freq = document.getElementById('suBillingFreq').value;
+    const cycleMul = { monthly: 1, quarterly: 3 * 0.98, annual: 12 * 0.95 }[freq];
+    planPrice = Math.round(planPrices[plan] * cycleMul);
+    planName = planNames[plan];
+    termLabel = { monthly: 'Monthly', quarterly: 'Quarterly', annual: 'Annual' }[freq];
+    productType = 'health';
+    signupState.billingFreq = freq;
+  }
+
+  signupState.planName = planName;
+  signupState.planPrice = planPrice;
+  signupState.termLabel = termLabel;
+  signupState.productType = productType;
+
+  try {
+    const res = await api('/api/otp/send', { method: 'POST', body: { email } });
+    demoOtp = res.demoOtp;
+    document.getElementById('otpSentMsg').innerHTML = `Code sent to <strong>${email}</strong> and <strong>${phone}</strong>.`;
+    document.getElementById('signupStep1').style.display = 'none';
+    document.getElementById('signupStep2').style.display = 'block';
+    setStep(2);
+    startOtpTimer();
+    toast('OTP sent');
+  } catch (e) { toast(e.message); }
+}
+function backToStep1() {
+  document.getElementById('signupStep1').style.display = 'block';
+  document.getElementById('signupStep2').style.display = 'none';
+  setStep(1);
+}
+function backToStep2() {
+  document.getElementById('signupStep2').style.display = 'block';
+  document.getElementById('signupStep3').style.display = 'none';
+  setStep(2);
+}
+function startOtpTimer() {
+  clearInterval(otpTimerInterval);
+  const expiry = Date.now() + 5 * 60 * 1000;
+  const el = document.getElementById('otpTimer');
+  otpTimerInterval = setInterval(() => {
+    const remaining = Math.max(0, expiry - Date.now());
+    const m = Math.floor(remaining / 60000);
+    const s = Math.floor((remaining % 60000) / 1000);
+    el.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    el.classList.toggle('expiring', remaining < 60000);
+    if (remaining <= 0) { clearInterval(otpTimerInterval); el.textContent = 'EXPIRED'; }
+  }, 1000);
+}
+async function resendOtp() {
+  try {
+    const res = await api('/api/otp/send', { method: 'POST', body: { email: signupState.email } });
+    demoOtp = res.demoOtp;
+    toast('New OTP sent');
+  } catch (e) { toast(e.message); }
+}
+function showDemoOtp() { if (demoOtp) toast('Demo OTP: ' + demoOtp); }
+async function verifyOtp() {
+  const inputs = document.querySelectorAll('#otpInputs input');
+  let code = '';
+  inputs.forEach(i => code += i.value);
+  if (code.length !== 6) return toast('Enter all 6 digits');
+  try {
+    await api('/api/otp/verify', { method: 'POST', body: { email: signupState.email, code } });
+    clearInterval(otpTimerInterval);
+    document.getElementById('signupStep2').style.display = 'none';
+    document.getElementById('signupStep3').style.display = 'block';
+    setStep(3);
+    document.getElementById('payName').textContent = signupState.person.fullName;
+    document.getElementById('payPlan').textContent = signupState.planName;
+    document.getElementById('payTerm').textContent = signupState.termLabel;
+    document.getElementById('payAmount').textContent = fmtKes(signupState.planPrice);
+    document.getElementById('paymentDetails').innerHTML = `
+      <div class="form-group"><label>${signupState.paymentMethod === 'mpesa' ? 'M-Pesa' : 'Airtel'} Number</label><input type="text" value="${signupState.phone}" readonly></div>
+      <div class="alert alert-info"><span>📱</span><div>Pay ${fmtKes(signupState.planPrice)}. Click Pay & Activate.</div></div>`;
+  } catch (e) { toast(e.message); }
+}
+document.querySelectorAll('#otpInputs input').forEach((inp, i, arr) => {
+  inp.addEventListener('input', e => {
+    if (e.target.value) { e.target.classList.add('filled'); if (i < arr.length - 1) arr[i + 1].focus(); }
+    else e.target.classList.remove('filled');
+  });
+  inp.addEventListener('keydown', e => { if (e.key === 'Backspace' && !e.target.value && i > 0) arr[i - 1].focus(); });
+  inp.addEventListener('paste', e => {
+    e.preventDefault();
+    const text = (e.clipboardData || window.clipboardData).getData('text').replace(/\D/g, '');
+    for (let j = 0; j < 6 && j < text.length; j++) { arr[j].value = text[j]; arr[j].classList.add('filled'); }
+    if (text.length >= 6) arr[5].focus();
+  });
+});
+async function processPayment() {
+  const btn = document.getElementById('payBtn');
+  btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> Processing…';
+  try {
+    const res = await api('/api/register', {
+      method: 'POST',
+      body: {
+        nationalId: signupState.nationalId,
+        email: signupState.email,
+        phone: signupState.phone,
+        kin: signupState.kin,
+        productType: signupState.productType,
+        plan: signupState.plan,
+        planName: signupState.planName,
+        planPrice: signupState.planPrice,
+        termLabel: signupState.termLabel,
+        paymentMethod: signupState.paymentMethod,
+        memberData: {
+          person: signupState.person,
+          student: signupState.student,
+          studentTerm: signupState.studentTerm,
+          bodaboda: signupState.bodaboda,
+          bodabodaTerm: signupState.bodabodaTerm,
+          corporate: signupState.corporate,
+          billingFreq: signupState.billingFreq
+        }
+      }
+    });
+    document.getElementById('signupStep3').style.display = 'none';
+    document.getElementById('signupStep4').style.display = 'block';
+    setStep(4);
+    document.getElementById('confPolicy').textContent = res.policyNo;
+    document.getElementById('confMember').textContent = res.memberId;
+    document.getElementById('confStart').textContent = new Date(res.startDate).toLocaleDateString('en-KE');
+    document.getElementById('confEnd').textContent = new Date(res.endDate).toLocaleDateString('en-KE');
+    document.getElementById('confEmail').value = res.email;
+    document.getElementById('confPass').value = res.defaultPassword;
+    signupState.memberId = res.memberId;
+    refreshMemberCount();
+    toast('🎉 Policy activated!');
+  } catch (e) {
+    toast(e.message);
+    btn.disabled = false; btn.textContent = 'Pay & Activate';
+  }
+}
+async function goToMemberPortal() {
+  try {
+    const data = await api('/api/member/' + signupState.memberId);
+    currentMember = data;
+    renderMemberPortal();
+    showPage('member');
+  } catch (e) { toast(e.message); }
+}
+function openMemberLogin() {
+  document.getElementById('loginEmail').value = '';
+  document.getElementById('loginPassword').value = '';
+  document.getElementById('loginError').style.display = 'none';
+  openModal('loginModal');
+}
+async function doLogin() {
+  const email = document.getElementById('loginEmail').value.trim();
+  const password = document.getElementById('loginPassword').value;
+  try {
+    const data = await api('/api/login', { method: 'POST', body: { email, password } });
+    currentMember = data;
+    closeModal('loginModal');
+    renderMemberPortal();
+    showPage('member');
+    toast('Welcome back');
+  } catch (e) {
+    document.getElementById('loginError').textContent = e.message;
+    document.getElementById('loginError').style.display = 'block';
+  }
+}
+function doLogout() { currentMember = null; showPage('home'); toast('Signed out'); }
+function renderMemberPortal() {
+  const m = currentMember.member;
+  document.getElementById('memberName').textContent = m.full_name.split(' ')[0];
+  document.getElementById('memberPolicy').textContent = m.policy_no;
+  document.getElementById('mCoverDates').textContent = new Date(m.start_date).toLocaleDateString('en-KE') + ' — ' + new Date(m.end_date).toLocaleDateString('en-KE');
+  document.getElementById('mPlan').textContent = m.plan_name;
+  document.getElementById('mPlanSub').textContent = fmtKes(m.plan_price);
+  document.getElementById('mNextDue').textContent = new Date(m.next_billing_date).toLocaleDateString('en-KE');
+  document.getElementById('mNextAmount').textContent = fmtKes(m.plan_price);
+  const openClaims = (currentMember.claims || []).filter(c => c.status !== 'Paid' && c.status !== 'Rejected').length;
+  document.getElementById('mOpenClaims').textContent = openClaims;
+
+  const events = [];
+  (currentMember.billing || []).slice(0,3).forEach(b => events.push({t:'Payment', d:`${fmtKes(b.amount)} · ${b.reference}`}));
+  (currentMember.claims || []).slice(0,3).forEach(c => events.push({t:`Claim ${c.claim_no}`, d:`${c.type} · ${fmtKes(c.amount)} · ${c.status}`}));
+  document.getElementById('mActivity').innerHTML = events.length ? events.map(e => `<div style="padding:8px 0; border-bottom:1px solid var(--border);"><strong>${e.t}</strong><div class="text-sm text-muted">${e.d}</div></div>`).join('') : '<div class="text-muted text-sm">No recent activity</div>';
+
+  document.getElementById('billingList').innerHTML = (currentMember.billing || []).length
+    ? currentMember.billing.map(b => `<div class="flex-between" style="padding:12px 0; border-bottom:1px solid var(--border);"><div><div style="font-weight:700; color:var(--primary);">${new Date(b.date).toLocaleDateString('en-KE')}</div><div class="text-sm text-muted">${b.method} · ${b.reference}</div></div><div style="text-align:right;"><div style="font-weight:800; color:var(--primary);">${fmtKes(b.amount)}</div><span class="badge badge-green">${b.status}</span></div></div>`).join('')
+    : '<div class="text-muted text-sm">No billing records</div>';
+
+  document.getElementById('claimsList').innerHTML = (currentMember.claims || []).length
+    ? currentMember.claims.map(c => {
+        const sb = { 'Submitted':'badge-blue', 'Under Review':'badge-amber', 'Approved':'badge-purple', 'Paid':'badge-green' }[c.status] || 'badge-gray';
+        return `<div class="flex-between" style="padding:12px 0; border-bottom:1px solid var(--border);"><div><div style="font-weight:700; color:var(--primary);">${c.claim_no}</div><div class="text-sm text-muted">${c.type} · ${c.provider}</div></div><div style="text-align:right;"><div style="font-weight:800;">${fmtKes(c.amount)}</div><span class="badge ${sb}">${c.status}</span></div></div>`;
+      }).join('')
+    : '<div class="text-center text-muted" style="padding:2rem;"><div style="font-size:2.5rem;">📄</div>No claims yet.</div>';
+
+  const unread = (currentMember.notifications || []).filter(n => n.unread).length;
+  const badge = document.getElementById('inboxBadge');
+  badge.style.display = unread ? 'inline-block' : 'none';
+  badge.textContent = unread;
+  document.getElementById('inboxList').innerHTML = (currentMember.notifications || []).length
+    ? currentMember.notifications.map(n => `<div style="padding:12px 0; border-bottom:1px solid var(--border);"><div class="flex-between"><div><span class="badge ${n.channel === 'sms' ? 'badge-green' : 'badge-blue'}">${n.channel.toUpperCase()}</span> <strong>${n.subject}</strong></div><div class="text-sm text-muted">${new Date(n.timestamp).toLocaleString('en-KE')}</div></div><div class="text-sm text-muted">${n.message}</div></div>`).join('')
+    : '<div class="text-muted text-sm">No notifications</div>';
+
+  document.getElementById('accountDetails').innerHTML = `
+    <div class="flex-between" style="padding:8px 0; border-bottom:1px solid var(--border);"><span class="text-sm text-muted">National ID</span><strong>${m.national_id}</strong></div>
+    <div class="flex-between" style="padding:8px 0; border-bottom:1px solid var(--border);"><span class="text-sm text-muted">Full Name</span><strong>${m.full_name}</strong></div>
+    <div class="flex-between" style="padding:8px 0; border-bottom:1px solid var(--border);"><span class="text-sm text-muted">Email</span><strong>${m.email}</strong></div>
+    <div class="flex-between" style="padding:8px 0; border-bottom:1px solid var(--border);"><span class="text-sm text-muted">Phone</span><strong>${m.phone}</strong></div>
+    <div class="flex-between" style="padding:8px 0; border-bottom:1px solid var(--border);"><span class="text-sm text-muted">County</span><strong>${m.county || '—'}</strong></div>
+    <div style="margin-top:1rem; padding-top:1rem; border-top:2px solid var(--primary);">
+      <div style="font-weight:700; color:var(--primary); font-size:0.9rem; margin-bottom:8px;">📞 Customer Care</div>
+      <a href="tel:0743663951" style="display:flex; align-items:center; gap:10px; padding:10px; border-radius:8px; background:#f0f6f4; text-decoration:none; color:var(--text); margin-bottom:6px;">
+        <span style="font-size:1.2rem;">📞</span>
+        <div><div class="text-sm text-muted" style="font-size:0.68rem;">Call</div><strong style="color:var(--primary);">0743663951</strong></div>
+      </a>
+      <a href="mailto:michaelmoseti49@gmail.com" style="display:flex; align-items:center; gap:10px; padding:10px; border-radius:8px; background:#f0f6f4; text-decoration:none; color:var(--text);">
+        <span style="font-size:1.2rem;">✉️</span>
+        <div><div class="text-sm text-muted" style="font-size:0.68rem;">Email</div><strong style="color:var(--primary); font-size:0.78rem;">michaelmoseti49@gmail.com</strong></div>
+      </a>
+    </div>`;
+}
+function switchTab(name, btn) {
+  document.querySelectorAll('.member-tab').forEach(t => t.style.display = 'none');
+  document.getElementById('memberTab-' + name).style.display = 'block';
+  document.querySelectorAll('#page-member .tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+}
+function switchTabByName(name) {
+  document.querySelectorAll('.member-tab').forEach(t => t.style.display = 'none');
+  document.getElementById('memberTab-' + name).style.display = 'block';
+  document.querySelectorAll('#page-member .tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('#page-member .tab').forEach(t => { if (t.textContent.toLowerCase().includes(name)) t.classList.add('active'); });
+}
+async function payNextCycle() {
+  if (!currentMember) return;
+  try {
+    await api(`/api/member/${currentMember.member.member_id}/pay`, { method: 'POST' });
+    const data = await api('/api/member/' + currentMember.member.member_id);
+    currentMember = data;
+    renderMemberPortal();
+    toast('Payment processed');
+  } catch (e) { toast(e.message); }
+}
+function openClaimModal() { openModal('claimModal'); }
+async function submitClaim() {
+  const type = document.getElementById('claimType').value;
+  const serviceDate = document.getElementById('claimDate').value;
+  const provider = document.getElementById('claimProvider').value.trim();
+  const amount = parseFloat(document.getElementById('claimAmount').value);
+  if (!serviceDate || !provider || !amount) return toast('Fill all fields');
+  try {
+    const res = await api(`/api/member/${currentMember.member.member_id}/claims`, {
+      method: 'POST',
+      body: { type, serviceDate, provider, amount, receipt: document.getElementById('claimReceipt').value, description: document.getElementById('claimDesc').value }
+    });
+    closeModal('claimModal');
+    toast('Claim submitted: ' + res.claimNo);
+    const data = await api('/api/member/' + currentMember.member.member_id);
+    currentMember = data;
+    renderMemberPortal();
+    switchTabByName('claims');
+  } catch (e) { toast(e.message); }
+}
+async function changePasswordPrompt() {
+  const oldPwd = prompt('Enter current password:');
+  if (!oldPwd) return;
+  const newPwd = prompt('Enter new password (min 8 chars):');
+  if (!newPwd || newPwd.length < 8) return toast('Min 8 characters');
+  try {
+    await api(`/api/member/${currentMember.member.member_id}/change-password`, { method: 'POST', body: { oldPassword: oldPwd, newPassword: newPwd } });
+    toast('Password changed');
+  } catch (e) { toast(e.message); }
+}
+async function openAdminView() {
+  openModal('adminModal');
+  try {
+    const data = await api('/api/members');
+    const tbody = document.getElementById('adminTable');
+    if (!data.count) { tbody.innerHTML = '<tr><td colspan="6" class="text-center text-muted">No members yet.</td></tr>'; return; }
+    tbody.innerHTML = data.members.map(m => `
+      <tr>
+        <td style="font-family:'Courier New',monospace; font-weight:700; color:var(--primary);">${m.member_id}</td>
+        <td>${m.full_name}</td>
+        <td class="text-sm">${m.email}</td>
+        <td>${m.plan_name}</td>
+        <td><span class="badge badge-green">${m.status}</span></td>
+        <td><button class="btn btn-sm btn-outline" onclick="adminLoginAs('${m.member_id}')">Login as</button></td>
+      </tr>`).join('');
+  } catch (e) { toast(e.message); }
+}
+async function adminLoginAs(memberId) {
+  try {
+    const data = await api('/api/member/' + memberId);
+    currentMember = data;
+    closeModal('adminModal');
+    renderMemberPortal();
+    showPage('member');
+    toast('Logged in as ' + data.member.full_name);
+  } catch (e) { toast(e.message); }
+}
+async function clearAllMembers() {
+  if (!confirm('Delete ALL members? This cannot be undone.')) return;
+  try {
+    await api('/api/admin/clear', { method: 'POST' });
+    openAdminView();
+    refreshMemberCount();
+    toast('All cleared');
+  } catch (e) { toast(e.message); }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  refreshMemberCount();
+  renderStudentPriceRows();
+  renderStudentPremTable();
+  updateIPA();
+  updateCorporate();
+});
+</script>
+</body>
+</html>
